@@ -4,37 +4,59 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.roselism.callpp.util.LogUtil;
+
 /**
- * @创建者 lai
- * @创建时间 2016/4/30
- * @packageName com.roselism.callpp
- * @更新时间 2016/4/30 20:55
- * @描述 全局唯一的Application类
+ * Created by simon on 2016/4/30.
  */
-public class CallppApplication extends Application {
-    private static Context mContext;
-    private static int     mMainThreadId;
-    //主线程Handler
-    private static Handler mMainHandler = new Handler();
+public class CallPPApplication extends Application{
 
+    private static Handler sMainHandler = new Handler();
+
+    private static Context sContext;// Application的上下文
+    private static int sMainThreadId;// 主线程Handler
+
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//    }
+
+
+    /**
+     * 获取context
+     *
+     * @return application的context
+     */
     public static Context getContext() {
-        return mContext;
+        return sContext;
     }
 
+    /**
+     * 获取主线程ID
+     *
+     * @return 主线程ID
+     */
     public static int getMainThreadId() {
-        return mMainThreadId;
-    }
-
-    public static Handler getMainHandler() {
-        return mMainHandler;
+        return sMainThreadId;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //初始化一些常见的属性放在myApplication中
-        mContext = getApplicationContext();
-        //主线程ID
-        mMainThreadId = android.os.Process.myTid();
+
+        LogUtil.i( "onCreate");
+
+        sContext = getApplicationContext();
+        sMainThreadId = android.os.Process.myTid();
+
+//        LogUtil.setIsDebug(true); // 开启debug模式
+
+//        BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
+//        bmobIniter.initBmob();
+
+    }
+
+    public static Handler getMainHandler() {
+        return sMainHandler;
     }
 }
