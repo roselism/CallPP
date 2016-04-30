@@ -3,14 +3,17 @@ package com.roselism.callpp.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.roselism.callpp.R;
+import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.Command;
 import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
 import com.roselism.callpp.model.engine.QueryUserReceiver;
 import com.roselism.callpp.model.engine.Sender;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
+import com.roselism.callpp.util.LogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +23,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     @Bind(R.id.login_et_email) EditText mloginEtEmail;
     @Bind(R.id.login_et_password) EditText mloginEtPassword;
     @Bind(R.id.login_et_password_again) EditText mloginEtPwdAgain;
+    @Bind(R.id.login_button) Button mLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 if (hasFocus) {
                     String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
-                    // xiefa
-                    QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener() {
+                    QueryUserReceiver<RoseUser> receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
                         @Override
-                        public void onSuccedd(Object t) {
-
+                        public void onSuccedd(RoseUser user) { // 查有此人
+                            LogUtil.i(user.toString());
+                            mLoginButton.setText(getResources().getString(R.string.login_login_button)); //显示登陆
                         }
 
                         @Override
@@ -77,4 +81,3 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         }
     }
 }
-

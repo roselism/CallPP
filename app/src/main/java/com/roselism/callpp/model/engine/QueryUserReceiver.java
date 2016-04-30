@@ -1,5 +1,7 @@
 package com.roselism.callpp.model.engine;
 
+import com.roselism.callpp.model.domain.bmob.User;
+import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.model.engine.stragegy.QueryUserByEmailStragegy;
 import com.roselism.callpp.model.engine.stragegy.StragegyContent;
@@ -27,12 +29,12 @@ public class QueryUserReceiver<R> {
      * 通过邮箱查询User
      */
     void queryUserByEmail(String email) {
-        StragegyContent<R> content = new StragegyContent();
-        content.setStragegy(new QueryUserByEmailStragegy());
-        content.run(new OnOperatListener<R>() {
+        StragegyContent<RoseUser> content = new StragegyContent();
+        content.setStragegy(new QueryUserByEmailStragegy(email));
+        content.run(new OnOperatListener<RoseUser>() {
             @Override
-            public void onSuccedd(R t) {
-                listener.onSuccedd(t);
+            public void onSuccedd(RoseUser user) {
+                listener.onSuccedd(user);
             }
 
             @Override
