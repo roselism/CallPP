@@ -1,5 +1,6 @@
 package com.roselism.callpp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     @Bind(R.id.login_et_password) EditText mloginEtPassword;
     @Bind(R.id.login_et_password_again) EditText mloginEtPwdAgain;
     @Bind(R.id.login_button) Button mLoginButton;
-    @Bind(R.id.profile) ImageView profile;
+    @Bind(R.id.profile) ImageView mProfile; // 用户的头像
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Bmob.initialize(this, "5b3be373e078b301e82d410c7e207e1d"); // 初始化bmob
-
     }
 
     void initEvent() {
@@ -147,7 +147,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
      * 登陆逻辑
      */
     public void login() {
+        String email = mloginEtEmail.getText().toString();
+        String password = mloginEtPassword.getText().toString().trim();
+        final RoseUser user = new RoseUser();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.login(); // 登陆
+        enterHome();
+    }
 
+    /**
+     * 跳转到主界面
+     */
+    void enterHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**

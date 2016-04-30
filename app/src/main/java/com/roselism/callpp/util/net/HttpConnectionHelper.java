@@ -34,7 +34,6 @@ public class HttpConnectionHelper {
      * @since 1.1 修复了构造器的bug
      */
     private HttpConnectionHelper(Builder builder) {
-//        this.path = builder.path;
 
         try {
             URL url = new URL(builder.path);
@@ -60,10 +59,6 @@ public class HttpConnectionHelper {
      * @since 1.0
      */
     public HttpURLConnection getConnection() throws IOException {
-//        if (path == null)
-//            throw new IllegalArgumentException("网络路径不能为null");
-//        URL url = new URL(path);
-//        Log.i("SplashActivity", "getConnection: ");
         return connnection;
     }
 
@@ -105,6 +100,12 @@ public class HttpConnectionHelper {
         public int connectionTimeOut; // 连接超时
         public int readTimeOut;
 
+        /**
+         * 设置网络路径
+         *
+         * @param path
+         * @return
+         */
         public Builder setPath(String path) {
             if (path == null || path.isEmpty())
                 throw new IllegalArgumentException();
