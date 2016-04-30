@@ -6,6 +6,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.roselism.callpp.R;
+import com.roselism.callpp.model.engine.Command;
+import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
+import com.roselism.callpp.model.engine.QueryUserReceiver;
+import com.roselism.callpp.model.engine.Sender;
+import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +56,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
             case R.id.login_et_password: // password 框获取焦点
                 if (hasFocus) {
                     String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
+
+                    QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener() {
+                        @Override
+                        public void onSuccedd(Object t) {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable error) {
+
+                        }
+                    });
+                    Command command = new QueryUserByEmailCommand(receiver);
+                    Sender sender = new Sender();
+                    sender.setCommand(command);
+                    sender.send();
 
                 }
                 break;
