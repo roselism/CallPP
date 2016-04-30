@@ -11,8 +11,9 @@ import cn.bmob.v3.listener.SaveListener;
 /**
  * Created by simon on 2016/4/30.
  */
-public class RoseUser extends RoseBO {
+public class RoseUser extends RoseObject {
     String email;
+    String password;
 
     public RoseUser() {
     }
@@ -25,27 +26,37 @@ public class RoseUser extends RoseBO {
         this.email = email;
     }
 
-    @Override
-    public <R> void save(final OnSaveListener<R> listener) {
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public void save(final OnSaveListener<? extends RoseObject> listener) {
         // 存储策略 - bmob对象的存储
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
         user.signUp(CallPPApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
-                listener.onFinish((R) user); // 返回储存成功的对象
+                listener.onFinish();
             }
 
             @Override
             public void onFailure(int i, String s) {
                 LogUtil.e("i:" + s);
+                listener.onError();
             }
         });
     }
 
+
     @Override
     public void update() {
+
 
     }
 

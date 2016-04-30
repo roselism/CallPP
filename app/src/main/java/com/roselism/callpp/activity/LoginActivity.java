@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Bmob.initialize(this, "5b3be373e078b301e82d410c7e207e1d"); // 初始化bmob
+
     }
 
     void initEvent() {
@@ -82,9 +83,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 break;
 
             case R.id.login_et_password: // password 框获取焦点
-                if (hasFocus) {
-                    String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
+                String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
+
+                if (hasFocus && email != null && email.trim().length() > 0) {
                     QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
                         @Override
                         public void onSuccedd(RoseUser user) { // 查有此人
@@ -116,11 +118,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
      * 注册逻辑
      */
     private void signUp() {
-        RoseUser user = new RoseUser();
+        String password = mloginEtPassword.getText().toString().trim();
+        String pwdAgain = mloginEtPwdAgain.getText().toString().trim();
+        if (!password.equals(pwdAgain)) { // 两次密码不相同
+            mloginEtPwdAgain.setError("密码不一致呦");
+            return;
+        }
+
+        final RoseUser user = new RoseUser();
+        String email = mloginEtEmail.getText().toString();
+        user.setEmail(email);
+        user.setPassword(password);
         user.save(new OnSaveListener<RoseUser>() {
             @Override
-            public void onFinish(RoseUser user) {
+            public void onFinish() {
                 LogUtil.i(user.getEmail() + "储存成功");
+                Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+                LogUtil.i(user.getEmail() + "注册失败");
             }
         });
     }
