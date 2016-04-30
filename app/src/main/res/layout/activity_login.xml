@@ -16,16 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:hint="@string/login_et_email"/>
+        android:hint="@string/login_et_email"
+        android:inputType="textEmailAddress"/>
 
     <!--输入密码-->
     <EditText
         android:id="@+id/login_et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_below="@id/login_et_email"
-        android:hint="@string/login_et_password"/>
+        android:layout_marginTop="6dp"
+        android:hint="@string/login_et_password"
+        android:inputType="textPassword"/>
 
     <!--再次输入密码-->
     <EditText
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_et_password"
         android:hint="@string/login_et_password_agagin"
+        android:inputType="textPassword"
         android:visibility="invisible"/>
 
     <Button
