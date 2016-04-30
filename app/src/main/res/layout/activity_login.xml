@@ -10,4 +10,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.LoginActivity">
 
+    <!--输入邮箱-->
+    <EditText
+        android:id="@+id/login_et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:hint="@string/login_et_email"/>
+
+    <!--输入密码-->
+    <EditText
+        android:id="@+id/login_et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_below="@id/login_et_email"
+        android:hint="@string/login_et_password"/>
+
+    <!--再次输入密码-->
+    <EditText
+        android:id="@+id/login_et_password_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_et_password"
+        android:hint="@string/login_et_password_agagin"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/login_login_signup_button"
+        android:textSize="19sp"/>
+
 </RelativeLayout>
