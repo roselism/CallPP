@@ -5,10 +5,11 @@ package com.roselism.callpp.model.domain.rose;
  * Created by simon on 2016/4/30.
  */
 public interface IBZ {
+
     /**
      * 添加方法
      */
-    void save();
+    <R> void save(OnSaveListener<R> listener);
 
     /**
      * 更新

@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.roselism.callpp.R;
+import com.roselism.callpp.model.domain.rose.OnSaveListener;
 import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.Command;
 import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
@@ -33,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     @Bind(R.id.login_et_password) EditText mloginEtPassword;
     @Bind(R.id.login_et_password_again) EditText mloginEtPwdAgain;
     @Bind(R.id.login_button) Button mLoginButton;
+    @Bind(R.id.profile) ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +107,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                     Sender sender = new Sender();
                     sender.setCommand(command);
                     sender.send();
-
                 }
                 break;
         }
@@ -115,7 +117,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
      */
     private void signUp() {
         RoseUser user = new RoseUser();
-        user.save();
+        user.save(new OnSaveListener<RoseUser>() {
+            @Override
+            public void onFinish(RoseUser user) {
+                LogUtil.i(user.getEmail() + "储存成功");
+            }
+        });
     }
 
     /**

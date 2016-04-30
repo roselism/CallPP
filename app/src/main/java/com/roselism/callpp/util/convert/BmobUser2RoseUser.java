@@ -18,6 +18,6 @@ public class BmobUser2RoseUser implements Converter<User, RoseUser> {
         user.setType(RoseBO.BMOB_TYPE); // 设置类型
         user.setEmail(parameter.getEmail());
 
-        return new RoseUser(parameter);
+        return new RoseUser();
     }
 }
