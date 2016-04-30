@@ -2,8 +2,9 @@ package com.roselism.callpp.model.engine.stragegy;
 
 import android.content.Context;
 
+import com.roselism.callpp.CallPPApplication;
 import com.roselism.callpp.model.domain.bmob.User;
-import com.roselism.callpp.model.domain.rose.RoseUser;
+import com.roselism.callpp.util.LogUtil;
 
 import java.util.List;
 
@@ -13,13 +14,14 @@ import cn.bmob.v3.listener.FindListener;
 /**
  * Created by simon on 2016/4/30.
  */
-public class QueryUserByEmailStragegy implements Stragegy<RoseUser> {
+public class QueryUserByEmailStragegy implements Stragegy<User> {
 
     String email;
-    Context context;
+    Context mContext;
 
     public QueryUserByEmailStragegy(String email) {
         this.email = email;
+        mContext = CallPPApplication.getContext();
     }
 
     /**
@@ -28,19 +30,26 @@ public class QueryUserByEmailStragegy implements Stragegy<RoseUser> {
      * @param listener
      */
     @Override
-    public void run(final OnOperatListener<RoseUser> listener) {
+    public void run(final OnOperatListener<User> listener) {
         BmobQuery<User> query = new BmobQuery<>();
         query.addWhereEqualTo("email", email);
-        query.findObjects(context, new FindListener<User>() {
+        query.findObjects(mContext, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                User user = list.get(0);
-                RoseUser roseUser = new RoseUser(user);
-                listener.onSuccedd(roseUser);
+                LogUtil.i("list.size = " + list.size() + "");
+
+                User user = null;
+                if (list != null && list.size() > 0) { // 查询成功且有数据
+                    user = list.get(0);
+                } else { // 查询成功但是无数据
+                    user = null; // 如果没有这个用户的话就赋值为null
+                }
+                listener.onSuccedd(user);
             }
 
             @Override
             public void onError(int i, String s) {
+                LogUtil.e(i + "" + s);
                 listener.onError(new Exception(i + "" + s));
             }
         });

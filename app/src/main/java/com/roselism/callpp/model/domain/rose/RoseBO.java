@@ -6,6 +6,8 @@ package com.roselism.callpp.model.domain.rose;
  */
 public abstract class RoseBO implements IBO, IBZ {
 
+    public static final String BMOB_TYPE = "bmob";
+
     /**
      * 对象的id
      */
@@ -21,6 +23,9 @@ public abstract class RoseBO implements IBO, IBZ {
      */
     String updateData;
 
+    /**
+     * 数据的类型（可能是bmob 也可能是aliyun 也可能是自己写的）
+     */
     String type;
 
     public String getType() {

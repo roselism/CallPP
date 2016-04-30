@@ -8,6 +8,10 @@ import com.roselism.callpp.model.domain.bmob.User;
 public class RoseUser extends RoseBO {
     String email;
 
+    public RoseUser() {
+    }
+
+
     /**
      * 适配
      *
@@ -17,6 +21,14 @@ public class RoseUser extends RoseBO {
         this.email = user.getEmail();
         this.createDate = user.getCreatedAt();
         this.objectId = user.getObjectId();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.roselism.callpp.util.io;
 
-import com.roselism.mobilesafe.utils.convert.InputStreamStringConverter;
+
+import com.roselism.callpp.util.convert.InStream2String;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class StreamUtil {
      * @since 1.0
      */
     public static String Stream2String(final InputStream in) throws IOException {
-        return new InputStreamStringConverter().convert(in);
+        return new InStream2String().convert(in);
     }
 
     /**

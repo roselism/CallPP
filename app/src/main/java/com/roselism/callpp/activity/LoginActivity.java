@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.roselism.callpp.R;
 import com.roselism.callpp.model.domain.rose.RoseUser;
@@ -17,9 +18,17 @@ import com.roselism.callpp.util.LogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.v3.Bmob;
 
-public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+/**
+ * @author simon wang
+ * @version 1.0
+ */
+public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 
+    private final static int LOGIN_ACTION = 1; // 登陆操作
+    private final static int SIGNUP_ACTION = 2; // 注册操作
+    public static int flag = 0;
     @Bind(R.id.login_et_email) EditText mloginEtEmail;
     @Bind(R.id.login_et_password) EditText mloginEtPassword;
     @Bind(R.id.login_et_password_again) EditText mloginEtPwdAgain;
@@ -36,14 +45,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     void initView() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        Bmob.initialize(this, "5b3be373e078b301e82d410c7e207e1d"); // 初始化bmob
     }
 
     void initEvent() {
         mloginEtPassword.setOnFocusChangeListener(this); // 给password设置焦点监听器
+        mLoginButton.setOnClickListener(this);
     }
 
     void initData() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.login_button: // 注册逻辑
+                if (flag == LOGIN_ACTION)
+                    login();
+                else if (flag == SIGNUP_ACTION)
+                    signUp();
+                break;
+        }
     }
 
     @Override
@@ -59,16 +82,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 if (hasFocus) {
                     String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
-                    QueryUserReceiver<RoseUser> receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
+                    QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
                         @Override
                         public void onSuccedd(RoseUser user) { // 查有此人
-                            LogUtil.i(user.toString());
-                            mLoginButton.setText(getResources().getString(R.string.login_login_button)); //显示登陆
+                            if (user != null) { // 该用户已经注册
+                                LogUtil.i(user.toString());
+                                showLoginComponent();
+                                flag = LOGIN_ACTION;
+                            } else { // 该用户还未注册
+                                showSignUpComponent();
+                                flag = SIGNUP_ACTION;
+                            }
                         }
 
                         @Override
                         public void onError(Throwable error) {
-
+                            Toast.makeText(LoginActivity.this, "有点小问题...", Toast.LENGTH_SHORT).show();
                         }
                     });
                     Command command = new QueryUserByEmailCommand(receiver, email);
@@ -80,4 +109,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 break;
         }
     }
+
+    /**
+     * 注册逻辑
+     */
+    private void signUp() {
+        RoseUser user = new RoseUser();
+        user.save();
+    }
+
+    /**
+     * 登陆逻辑
+     */
+    public void login() {
+
+    }
+
+    /**
+     * 显示登陆逻辑的组件
+     */
+    private void showLoginComponent() {
+        mLoginButton.setText(getResources().getString(R.string.login_login_button)); //显示登陆
+    }
+
+    /**
+     * 显示注册界面的组件
+     */
+    private void showSignUpComponent() {
+        mLoginButton.setText(getResources().getString(R.string.login_signup_button));
+        mloginEtPwdAgain.setVisibility(View.VISIBLE); // 显示二次密码
+    }
+
+
 }
