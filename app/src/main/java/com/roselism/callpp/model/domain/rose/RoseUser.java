@@ -1,5 +1,7 @@
 package com.roselism.callpp.model.domain.rose;
 
+import android.widget.Toast;
+
 import com.roselism.callpp.CallPPApplication;
 import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.util.LogUtil;
@@ -53,6 +55,24 @@ public class RoseUser extends RoseObject {
         });
     }
 
+    /**
+     * 用户的登陆逻辑
+     */
+    public void login() {
+        Converter<RoseUser, User> converter = new RoseUser2BmobUser();
+        final User user = converter.convert(this);
+        user.login(CallPPApplication.getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() { //登陆成功
+                Toast.makeText(CallPPApplication.getContext(), "登陆成功", Toast.LENGTH_SHORT).show(); // 登陆成功
+            }
+
+            @Override
+            public void onFailure(int i, String s) { // 登陆失败
+                Toast.makeText(CallPPApplication.getContext(), "登陆失败", Toast.LENGTH_SHORT).show(); // 登陆成功
+            }
+        });
+    }
 
     @Override
     public void update() {
