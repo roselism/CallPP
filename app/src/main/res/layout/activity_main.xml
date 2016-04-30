@@ -4,14 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/main_rg_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/main_rb_toolbar_home"
+            android:layout_width="0dp"
+            android:text="@string/main_rb_toolbar_home"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/radiobutton_home_selector"
+            android:textColor="@color/toolbar_text_selector"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/main_rb_toolbar_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/toolbar_text_selector"
+            android:text="@string/main_rb_toolbar_user"
+            android:button="@null"
+            android:drawableTop="@drawable/radiobutton_user_selector"
+            android:gravity="center"
+            android:checked="false"/>
+
+    </RadioGroup>
 </RelativeLayout>

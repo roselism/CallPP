@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Call++</string>
+    <string name="main_rb_toolbar_home">首页</string>
+    <string name="main_rb_toolbar_user">用户设置</string>
 </resources>
