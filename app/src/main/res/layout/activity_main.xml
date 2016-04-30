@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-
     <RadioGroup
         android:id="@+id/main_rg_toolbar"
         android:layout_width="match_parent"
@@ -17,10 +16,10 @@
         <RadioButton
             android:id="@+id/main_rb_toolbar_home"
             android:layout_width="0dp"
-            android:checked="true"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="true"
             android:drawableTop="@drawable/radiobutton_home_selector"
             android:gravity="center"
             android:text="@string/main_rb_toolbar_home"
