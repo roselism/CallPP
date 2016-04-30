@@ -26,7 +26,7 @@ public class QueryUserReceiver<R> {
     /**
      * 通过邮箱查询User
      */
-    void queryUserByEmail() {
+    void queryUserByEmail(String email) {
         StragegyContent<R> content = new StragegyContent();
         content.setStragegy(new QueryUserByEmailStragegy());
         content.run(new OnOperatListener<R>() {

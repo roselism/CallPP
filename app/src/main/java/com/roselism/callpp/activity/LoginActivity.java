@@ -32,8 +32,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     void initView() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-
     }
 
     void initEvent() {
@@ -57,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 if (hasFocus) {
                     String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
+                    // xiefa
                     QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener() {
                         @Override
                         public void onSuccedd(Object t) {
@@ -68,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
 
                         }
                     });
-                    Command command = new QueryUserByEmailCommand(receiver);
+                    Command command = new QueryUserByEmailCommand(receiver, email);
                     Sender sender = new Sender();
                     sender.setCommand(command);
                     sender.send();
