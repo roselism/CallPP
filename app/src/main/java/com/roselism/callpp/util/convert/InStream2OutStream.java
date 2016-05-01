@@ -25,7 +25,6 @@ public class InStream2OutStream implements Converter<InputStream, OutputStream> 
     @Override
     public OutputStream convert(InputStream in) {
 
-//        inputStream = helper.getConnection().getInputStream();
         OutputStream output = null;
         try {
             output = new FileOutputStream(out);

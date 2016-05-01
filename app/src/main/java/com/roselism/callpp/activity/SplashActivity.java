@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,12 +16,14 @@ import android.widget.TextView;
 
 import com.roselism.callpp.R;
 import com.roselism.callpp.util.LogUtil;
+import com.roselism.callpp.util.convert.InStream2OutStream;
 import com.roselism.callpp.util.convert.InStream2String;
 import com.roselism.callpp.util.net.HttpConnectionHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
 import butterknife.Bind;
@@ -53,7 +56,7 @@ public class SplashActivity extends AppCompatActivity {
                 case CODE_IO_ERROR:
                     break;
                 case CODE_READ_FINISHED:
-
+                    checkUpdate();
                     break;
             }
         }
@@ -74,17 +77,56 @@ public class SplashActivity extends AppCompatActivity {
      */
     void buildDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("发现新版本" + serverVersionName).setMessage(desc).setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setTitle("发现新版本" + serverVersionName).
+                setMessage(desc).
+                setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { // 开始下载
+                        try {
+                            download();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).
+                setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        enterHome(); // 取消时进入home
+                    }
+                }).
+                setNegativeButton("一会儿再说", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        enterHome(); // 进入主页
+                    }
+                }).show();
+    }
 
-            }
-        }).setNegativeButton("一会儿再说", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+    /**
+     * 开始下载
+     *
+     * @throws IOException
+     */
+    private void download() throws IOException {
+        HttpConnectionHelper.Builder builder = new HttpConnectionHelper.Builder();
+        HttpConnectionHelper helper = builder.setPath(downloadUrl).build();
 
-            }
-        }).show();
+        File out = new File(getFilesDir(), serverVersionName + ".apk");
+        InStream2OutStream convert = new InStream2OutStream(out); // 输入输出流互考
+        convert.convert(helper.getConnection().getInputStream());
+
+        // 跳转到系统下载页面
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setDataAndType(Uri.fromFile(out), "application/vnd.android.package-archive");
+        // startActivity(intent);
+        startActivityForResult(intent, 0);// 如果用户取消安装的话,会返回结果,回调方法onActivityResult
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
     }
 
     /**
@@ -140,7 +182,9 @@ public class SplashActivity extends AppCompatActivity {
      * 检验是否能够更新
      */
     public void checkUpdate() {
-
+        if (serverVersionCode > readVersionCode()) { // 有更新版本
+            buildDialog(); // 创建一个dialog
+        }
     }
 
     /**
