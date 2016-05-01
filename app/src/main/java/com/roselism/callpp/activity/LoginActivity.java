@@ -87,15 +87,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 } else if (email != null) { // 失去焦点， 且email不为null
                     if (MatcherUtil.matchEmail(email)) { // 匹配email
                         // 当email输入框失去焦点时并且email地址不为null 且长度大于0(说明用户输入完成斌且开始输入密码)
+                        LogUtil.i("邮箱已经匹配");
+
+                        // 发送一条查询此人的命令
                         QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
                             @Override
                             public void onSuccedd(RoseUser user) { // 查有此人
                                 if (user != null) { // 该用户已经注册
-                                    LogUtil.i(user.toString());
+                                    LogUtil.i(user.toString() + "已经注册");
                                     showLoginComponent();
                                     flag = LOGIN_ACTION;
                                 } else { // 该用户还未注册
                                     showSignUpComponent();
+                                    LogUtil.i("还没有注册");
                                     flag = SIGNUP_ACTION;
                                 }
                             }
@@ -105,10 +109,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                                 Toast.makeText(LoginActivity.this, "有点小问题...", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        Command command = new QueryUserByEmailCommand(receiver, email);
-                        Sender sender = new Sender();
-                        sender.setCommand(command);
-                        sender.send();
+                        Command command = new QueryUserByEmailCommand(receiver, email); // 查询该用户
+                        Sender sender = new Sender(); // 创建一个命令请求者
+                        sender.setCommand(command); // 请求者设置命令
+                        sender.send(); // 将命令发出
 
                         LogUtil.i("email 输入框失去焦点");
                     } else { // 邮箱格式不正确
@@ -122,7 +126,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 if (hasFocus) { // 密码输入框焦点的时候
                     LogUtil.i("password框获得焦点");
                 }
-
                 break;
         }
     }
