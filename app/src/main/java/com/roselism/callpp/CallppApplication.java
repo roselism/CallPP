@@ -11,10 +11,12 @@ import com.roselism.callpp.util.LogUtil;
  */
 public class CallppApplication extends Application {
 
-    private static Handler sMainHandler = new Handler();
+
+    private static Handler sMainHandler;
 
     private static Context sContext;// Application的上下文
     private static int sMainThreadId;// 主线程Handler
+
 
     /**
      * 获取context
@@ -46,5 +48,14 @@ public class CallppApplication extends Application {
 
         sContext = getApplicationContext();
         sMainThreadId = android.os.Process.myTid();
+
+        sMainHandler = new Handler();
+
+        //        LogUtil.setIsDebug(true); // 开启debug模式
+
+        //        BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
+        //        bmobIniter.initBmob();
+
     }
+
 }
