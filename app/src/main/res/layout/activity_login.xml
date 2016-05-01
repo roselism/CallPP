@@ -34,7 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_et_email"
-        android:layout_marginTop="6dp"
         android:hint="@string/login_et_password"
         android:inputType="textPassword"/>
 
