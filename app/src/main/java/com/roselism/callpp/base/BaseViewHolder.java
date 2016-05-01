@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @param <T> View的子类,可以指定ViewHolder中要返回的根视图
- *
  * @创建者 lai
  * @创建时间 2016/4/30
  * @packageName base
@@ -18,8 +17,8 @@ import java.util.List;
 public abstract class BaseViewHolder<T extends View, V> {
 
     protected List<V> mDatas = new ArrayList<>();
-    private   T       mRootView;//根视图
     protected Context mContext;
+    private T mRootView;//根视图
 
     public BaseViewHolder(Context context) {
         mContext = context;
