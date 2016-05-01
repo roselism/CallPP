@@ -2,7 +2,9 @@ package com.roselism.callpp.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Handler;
+import android.view.WindowManager;
 
 import com.roselism.callpp.CallPPApplication;
 
@@ -111,5 +113,17 @@ public class UIUtils {
      */
     public static void removeTask(Runnable task) {
         UIUtils.getMainThreadHandler().removeCallbacks(task);
+    }
+
+    /**
+     * 获取屏幕大小
+     * @return
+     */
+    public static Point getScreenSize(){
+        WindowManager wm = (WindowManager) getContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        Point point = new Point();
+        wm.getDefaultDisplay().getSize(point);
+        return point;
     }
 }
