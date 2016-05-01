@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
  * 带有进度条的EidtText
  * Created by simon on 2016/5/1.
  */
-public class ProgressEditText extends EditText {
+public class progressEditText extends EditText {
 
     @Bind(R.id.edittext) EditText mEdittext;
     @Bind(R.id.progress) ProgressBar mProgress;
@@ -26,17 +26,17 @@ public class ProgressEditText extends EditText {
      *
      * @param context
      */
-    public ProgressEditText(Context context) {
+    public progressEditText(Context context) {
         super(context);
         initView();
     }
 
-    public ProgressEditText(Context context, AttributeSet attrs) {
+    public progressEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public ProgressEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public progressEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }

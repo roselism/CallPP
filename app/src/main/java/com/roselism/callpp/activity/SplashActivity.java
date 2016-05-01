@@ -15,17 +15,15 @@ public class SplashActivity extends AppCompatActivity {
 
     @Bind(R.id.bg_image) ImageView mBgImage;
     @Bind(R.id.splash_tv_versionname) TextView mSplashTvVersionname;
-    @Bind(R.id.splash_progress_loading) ProgressBar mSplashProgressLoading;
+    @Bind(R.id.splash_progress_loading) ProgressBar mSplashProgressLoading;//
 
     // json
     //{"versionCode":"1", "versionName":"1.52.52","desc":"新增NB功能，赶快下载","downloadLink":"www.asdjfiosdf.sdfasd"}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);//ajsldfkjaosjeohgasdhahsodfnvb
         ButterKnife.bind(this);
-
-
     }
 
     /**
@@ -33,11 +31,10 @@ public class SplashActivity extends AppCompatActivity {
      * @return
      */
     protected String readVersionName() {
-
     }
 
     protected String readVersionCode() {
-
+//
     }
 
     /**
