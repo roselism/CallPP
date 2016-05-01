@@ -52,10 +52,13 @@ public class SplashActivity extends AppCompatActivity {
                 case ENTER_HOME:
                     break;
                 case CODE_JSON_ERROR:
+                    LogUtil.i("json error");
                     break;
                 case CODE_IO_ERROR:
+                    LogUtil.i("io error");
                     break;
                 case CODE_READ_FINISHED:
+                    LogUtil.i("read finished");
                     checkUpdate();
                     break;
             }
@@ -85,6 +88,7 @@ public class SplashActivity extends AppCompatActivity {
                         try {
                             download();
                         } catch (IOException e) {
+                            LogUtil.i(e.getLocalizedMessage());
                             e.printStackTrace();
                         }
                     }
@@ -215,7 +219,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Message msg = mHandler.obtainMessage();
                 HttpConnectionHelper.Builder builder = new HttpConnectionHelper.Builder();
-                HttpConnectionHelper helper = builder.setPath("url").build(); // url
+                HttpConnectionHelper helper = builder.setPath("https://github.com/roselism/callpp/blob/simon/update/download.json").build(); // url
                 try {
                     if (helper.isResponseOk()) {
 
