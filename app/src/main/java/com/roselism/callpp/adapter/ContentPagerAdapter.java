@@ -17,12 +17,12 @@ import com.roselism.callpp.factory.ViewHolderFactory;
  */
 public class ContentPagerAdapter extends PagerAdapter {
 
-    private int     mCount;
+    private int mCount;
     private Context mContext;
 
     /**
      * @param context 上下文
-     * @param count 显示多少页
+     * @param count   显示多少页
      */
     public ContentPagerAdapter(Context context, int count) {
         mContext = context;

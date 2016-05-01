@@ -50,8 +50,9 @@
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
+        android:background="@drawable/btn_login_button"
+        android:layout_below="@id/login_et_password_again"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:text="@string/login_login_signup_button"
         android:textSize="19sp"/>
 

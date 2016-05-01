@@ -13,8 +13,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
-    @Bind(R.id.main_rg_toolbar)        RadioGroup mRgToolbar;
-    @Bind(R.id.main_viewpager_content) ViewPager  mViewpagerContent;
+    @Bind(R.id.main_rg_toolbar) RadioGroup mRgToolbar;
+    @Bind(R.id.main_viewpager_content) ViewPager mViewpagerContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

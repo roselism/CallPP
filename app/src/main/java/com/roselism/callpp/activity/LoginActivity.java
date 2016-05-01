@@ -168,8 +168,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         final RoseUser user = new RoseUser();
         user.setEmail(email);
         user.setPassword(password);
-        user.login(); // 登陆
-        enterHome();
+        user.login(new OnOperatListener<Boolean>() {
+            @Override
+            public void onSuccedd(Boolean t) {
+                if (t)
+                    enterHome();
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        }); // 登陆
+
     }
 
     /**
