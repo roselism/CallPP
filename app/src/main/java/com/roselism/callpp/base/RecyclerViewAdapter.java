@@ -46,7 +46,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
 	 * @param itemLongClickListener
 	 *            长按监听回调接口
 	 */
-	public void setOnLongClickListener(
+	public void setOnItemLongClickListener(
 			OnItemLongClickListener itemLongClickListener) {
 		mItemLongClickListener = itemLongClickListener;
 	}
@@ -63,7 +63,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
 	}
 
 	public interface OnItemLongClickListener {
-		void onItemClick(View view, int position);
+		void onItemLongClick(View view, int position);
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -64,7 +64,7 @@ public class HomeRecyclerAdapter extends RecyclerViewAdapter<String> {
         @Override
         public boolean onLongClick(View v) {
             if (mItemLongClickListener != null) {
-                mItemLongClickListener.onItemClick(v, getAdapterPosition());
+                mItemLongClickListener.onItemLongClick(v, getAdapterPosition());
             }
             return true;
         }
