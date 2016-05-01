@@ -18,6 +18,7 @@ import com.roselism.callpp.model.engine.QueryUserReceiver;
 import com.roselism.callpp.model.engine.Sender;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.util.LogUtil;
+import com.roselism.callpp.util.MatcherUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     }
 
     void initEvent() {
+        mloginEtEmail.setOnFocusChangeListener(this);
         mloginEtPassword.setOnFocusChangeListener(this); // 给password设置焦点监听器
         mLoginButton.setOnClickListener(this);
     }
@@ -77,39 +79,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {
             case R.id.login_et_email:
-                if (hasFocus) { // 当前email获取焦点
-
-                }
-                break;
-
-            case R.id.login_et_password: // password 框获取焦点
 
                 String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
-                if (hasFocus && email != null && email.trim().length() > 0) {
-                    QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
-                        @Override
-                        public void onSuccedd(RoseUser user) { // 查有此人
-                            if (user != null) { // 该用户已经注册
-                                LogUtil.i(user.toString());
-                                showLoginComponent();
-                                flag = LOGIN_ACTION;
-                            } else { // 该用户还未注册
-                                showSignUpComponent();
-                                flag = SIGNUP_ACTION;
+                if (hasFocus) { // 当前email获取焦点
+                    LogUtil.i("email 输入框获得焦点");
+                } else if (email != null) { // 失去焦点， 且email不为null
+                    if (MatcherUtil.matchEmail(email)) { // 匹配email
+                        // 当email输入框失去焦点时并且email地址不为null 且长度大于0(说明用户输入完成斌且开始输入密码)
+                        QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
+                            @Override
+                            public void onSuccedd(RoseUser user) { // 查有此人
+                                if (user != null) { // 该用户已经注册
+                                    LogUtil.i(user.toString());
+                                    showLoginComponent();
+                                    flag = LOGIN_ACTION;
+                                } else { // 该用户还未注册
+                                    showSignUpComponent();
+                                    flag = SIGNUP_ACTION;
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onError(Throwable error) {
-                            Toast.makeText(LoginActivity.this, "有点小问题...", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    Command command = new QueryUserByEmailCommand(receiver, email);
-                    Sender sender = new Sender();
-                    sender.setCommand(command);
-                    sender.send();
+                            @Override
+                            public void onError(Throwable error) {
+                                Toast.makeText(LoginActivity.this, "有点小问题...", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Command command = new QueryUserByEmailCommand(receiver, email);
+                        Sender sender = new Sender();
+                        sender.setCommand(command);
+                        sender.send();
+
+                        LogUtil.i("email 输入框失去焦点");
+                    } else { // 邮箱格式不正确
+                        mloginEtEmail.setError("邮箱格式不是很正确");
+                    }
                 }
+
+                break;
+
+            case R.id.login_et_password: // password 框获取焦点
+                if (hasFocus) { // 密码输入框焦点的时候
+                    LogUtil.i("password框获得焦点");
+                }
+
                 break;
         }
     }
@@ -170,6 +183,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
      */
     private void showLoginComponent() {
         mLoginButton.setText(getResources().getString(R.string.login_login_button)); //显示登陆
+        mloginEtPwdAgain.setVisibility(View.INVISIBLE); // 二次密码框消失
     }
 
     /**
@@ -179,6 +193,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         mLoginButton.setText(getResources().getString(R.string.login_signup_button));
         mloginEtPwdAgain.setVisibility(View.VISIBLE); // 显示二次密码
     }
-
-
 }

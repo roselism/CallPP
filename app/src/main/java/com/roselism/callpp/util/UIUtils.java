@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
 
-import com.roselism.callpp.CallPPApplication;
+import com.roselism.callpp.CallppApplication;
 
 
 /**
@@ -17,7 +17,7 @@ import com.roselism.callpp.CallPPApplication;
 public class UIUtils {
     /**得到一个上下文*/
     public static Context getContext() {
-        return CallPPApplication.getContext();
+        return CallppApplication.getContext();
     }
 
     /**得到Resouce对象*/
@@ -52,12 +52,12 @@ public class UIUtils {
 
     /**得到主线程的id*/
     public static long getMainThreadId() {
-        return CallPPApplication.getMainThreadId();
+        return CallppApplication.getMainThreadId();
     }
 
     /**得到主线程中创建一个handler*/
     public static Handler getMainThreadHandler() {
-        return CallPPApplication.getMainHandler();
+        return CallppApplication.getMainHandler();
     }
 
     /**安全的执行一个task*/
