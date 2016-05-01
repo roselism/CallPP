@@ -2,7 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <padding android:left="@dimen/activity_horizontal_margin"></padding>
+            <padding
+                android:left="@dimen/activity_horizontal_margin"
+                android:right="@dimen/activity_horizontal_margin">
+            </padding>
             <stroke
                 android:width="2dp"
                 android:color="@color/peter_river"

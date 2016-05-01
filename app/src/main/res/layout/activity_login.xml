@@ -51,7 +51,7 @@
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_below="@id/login_et_password_again"
         android:background="@drawable/btn_login_selector"
         android:elevation="5dp"
