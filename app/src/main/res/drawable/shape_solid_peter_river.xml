@@ -6,7 +6,6 @@
             android:width="1dp"
             android:color="@color/white">
         </stroke>
-        <corners android:radius="3dp"></corners>
         <solid android:color="@color/peter_river"></solid>
     </shape>
 

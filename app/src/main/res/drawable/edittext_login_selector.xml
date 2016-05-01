@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <padding android:left="@dimen/activity_horizontal_margin"></padding>
+            <stroke
+                android:width="2dp"
+                android:color="@color/peter_river"
+                android:dashWidth="0dp">
+            </stroke>
+            <solid android:color="@color/absolute_alpha"></solid>
+            <size android:height="48dp"></size>
+            <corners android:radius="6dp"></corners>
+        </shape>
+    </item>
+</selector>
