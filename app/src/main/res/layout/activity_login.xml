@@ -48,11 +48,6 @@
         android:inputType="textPassword"
         android:visibility="invisible"/>
 
-    <!--<com.roselism.callpp.view.ProgressEditText-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/login_et_password_again"/>-->
-
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
