@@ -24,7 +24,7 @@ public class HttpConnectionHelper {
      */
     public static final String GET_METHOD = "GET";
 
-    HttpURLConnection connnection;
+    HttpURLConnection connection;
 
     /**
      * 建造者模式
@@ -37,14 +37,17 @@ public class HttpConnectionHelper {
 
         try {
             URL url = new URL(builder.path);
-            connnection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
 
-            if (builder.requestMethod != null)
-                connnection.setRequestMethod(builder.requestMethod);
-            if (builder.readTimeOut > 0)
-                connnection.setReadTimeout(builder.readTimeOut);
-            if (builder.connectionTimeOut > 0)
-                connnection.setConnectTimeout(builder.connectionTimeOut);
+            connection.setRequestMethod(builder.requestMethod != null ? builder.requestMethod : POST_METHOD);
+//            if (builder.requestMethod != null)
+//                connection.setRequestMethod(builder.requestMethod);
+            connection.setReadTimeout(builder.readTimeOut == 0 ? builder.readTimeOut : 5000);
+//            if (builder.readTimeOut > 0)
+//                connection.setReadTimeout(builder.readTimeOut);
+            connection.setConnectTimeout(builder.connectionTimeOut == 0 ? builder.connectionTimeOut : 5000);
+//            if (builder.connectionTimeOut > 0)
+//                connection.setConnectTimeout(builder.connectionTimeOut);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -59,7 +62,7 @@ public class HttpConnectionHelper {
      * @since 1.0
      */
     public HttpURLConnection getConnection() throws IOException {
-        return connnection;
+        return connection;
     }
 
     /**
@@ -97,8 +100,8 @@ public class HttpConnectionHelper {
         public String path;
         public String requestMethod; // 请求方法
         public boolean useCatches; // 使用缓存
-        public int connectionTimeOut; // 连接超时
-        public int readTimeOut;
+        public int connectionTimeOut = 0; // 连接超时
+        public int readTimeOut = 0;
 
         /**
          * 设置网络路径
