@@ -37,13 +37,13 @@ public class HomeRecyclerAdapter extends RecyclerViewAdapter<String> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         HomeViewHolder viewHolder = (HomeViewHolder) holder;
         viewHolder.mPhoneNumber.setText(mDatas.get(position));
-        viewHolder.mPhoto.setImageResource(R.mipmap.profile2);
+        viewHolder.mPhoto.setImageResource(R.mipmap.ic_launcher);
     }
 
     public class HomeViewHolder extends RecyclerViewAdapter.ViewHolder implements View.OnLongClickListener {
 
-        @Bind(R.id.main_item_tv_phonenumber) public TextView mPhoneNumber;
-        @Bind(R.id.main_item_img_photo) public ImageView mPhoto;
+        @Bind(R.id.main_item_tv_phonenumber) public TextView  mPhoneNumber;
+        @Bind(R.id.main_item_img_photo) public      ImageView mPhoto;
 
         public HomeViewHolder(View itemView) {
             super(itemView);
@@ -64,7 +64,7 @@ public class HomeRecyclerAdapter extends RecyclerViewAdapter<String> {
         @Override
         public boolean onLongClick(View v) {
             if (mItemLongClickListener != null) {
-                mItemLongClickListener.onItemClick(v, getAdapterPosition());
+                mItemLongClickListener.onItemLongClick(v, getAdapterPosition());
             }
             return true;
         }
