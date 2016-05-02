@@ -40,6 +40,7 @@ public class ContactUtil {
                 ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER,//是否有号码
                 ContactsContract.CommonDataKinds.Phone._ID,//联系人ID
                 ContactsContract.CommonDataKinds.Photo._ID,//联系人头像ID
+                ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY
         };
         Cursor cursor = resolver.query(uri, projection, null, null, null, null);
         List<ContactInfo> list = new ArrayList<>();
@@ -55,6 +56,7 @@ public class ContactUtil {
                 int hasPhoneNumber = cursor.getInt(cursor.getColumnIndex(projection[4]));
                 long contactID = cursor.getLong(cursor.getColumnIndex(projection[5]));
                 long photoID = cursor.getLong(cursor.getColumnIndex(projection[6]));
+                String lookupKey = cursor.getString(cursor.getColumnIndex(projection[7]));
                 Bitmap contactPhoto = null;
                 //photoid 大于0 表示联系人有头像 如果没有给此人设置头像则给他一个默认的
                 if (photoID > 0) {
@@ -65,7 +67,7 @@ public class ContactUtil {
                     contactPhoto = BitmapFactory.decodeResource(UIUtils.getResources(), R.mipmap.ic_launcher);
                 }
                 //把联系人信息封装到集合中
-                ContactInfo contactInfo = new ContactInfo(name, number, timesContacted, lastTime, hasPhoneNumber, contactID, photoID, contactPhoto);
+                ContactInfo contactInfo = new ContactInfo(name, number, timesContacted, lastTime, hasPhoneNumber, contactID, photoID, contactPhoto,lookupKey);
                 list.add(contactInfo);
             }
             cursor.close();

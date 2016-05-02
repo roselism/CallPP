@@ -2,7 +2,7 @@ package com.roselism.callpp.model.domain.rose;
 
 import android.widget.Toast;
 
-import com.roselism.callpp.CallApplication;
+import com.roselism.callpp.CallppApplication;
 import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.util.LogUtil;
 import com.roselism.callpp.util.convert.Converter;
@@ -41,7 +41,7 @@ public class RoseUser extends RoseObject {
         // 存储策略 - bmob对象的存储
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
-        user.signUp(CallApplication.getContext(), new SaveListener() {
+        user.signUp(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
                 listener.onFinish();
@@ -61,15 +61,15 @@ public class RoseUser extends RoseObject {
     public void login() {
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
-        user.login(CallApplication.getContext(), new SaveListener() {
+        user.login(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() { //登陆成功
-                Toast.makeText(CallApplication.getContext(), "登陆成功", Toast.LENGTH_SHORT).show(); // 登陆成功
+                Toast.makeText(CallppApplication.getContext(), "登陆成功", Toast.LENGTH_SHORT).show(); // 登陆成功
             }
 
             @Override
             public void onFailure(int i, String s) { // 登陆失败
-                Toast.makeText(CallApplication.getContext(), "登陆失败", Toast.LENGTH_SHORT).show(); // 登陆成功
+                Toast.makeText(CallppApplication.getContext(), "登陆失败", Toast.LENGTH_SHORT).show(); // 登陆成功
             }
         });
     }
