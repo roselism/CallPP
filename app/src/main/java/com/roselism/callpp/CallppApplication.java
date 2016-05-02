@@ -16,6 +16,12 @@ public class CallppApplication extends Application {
     private static Context sContext;// Application的上下文
     private static int sMainThreadId;// 主线程Handler
 
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//    }
+
+
     /**
      * 获取context
      *
@@ -32,10 +38,6 @@ public class CallppApplication extends Application {
      */
     public static int getMainThreadId() {
         return sMainThreadId;
-    }
-
-    public static Handler getMainHandler() {
-        return sMainHandler;
     }
 
     @Override
