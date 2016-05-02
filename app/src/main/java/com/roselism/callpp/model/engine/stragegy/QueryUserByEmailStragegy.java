@@ -2,7 +2,7 @@ package com.roselism.callpp.model.engine.stragegy;
 
 import android.content.Context;
 
-import com.roselism.callpp.CallPPApplication;
+import com.roselism.callpp.CallApplication;
 import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.util.LogUtil;
 
@@ -21,7 +21,7 @@ public class QueryUserByEmailStragegy implements Stragegy<User> {
 
     public QueryUserByEmailStragegy(String email) {
         this.email = email;
-        mContext = CallPPApplication.getContext();
+        mContext = CallApplication.getContext();
     }
 
     /**

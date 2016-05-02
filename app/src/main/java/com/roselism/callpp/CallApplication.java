@@ -9,17 +9,17 @@ import com.roselism.callpp.util.LogUtil;
 /**
  * Created by simon on 2016/4/30.
  */
-public class CallPPApplication extends Application{
+public class CallApplication extends Application {
 
-    private static Handler sMainHandler = new Handler();
+    private static Handler sMainHandler;
 
     private static Context sContext;// Application的上下文
-    private static int sMainThreadId;// 主线程Handler
+    private static int     sMainThreadId;// 主线程Handler
 
-//    @Override
-//    public void onCreate() {
-//        super.onCreate();
-//    }
+    //    @Override
+    //    public void onCreate() {
+    //        super.onCreate();
+    //    }
 
 
     /**
@@ -44,15 +44,16 @@ public class CallPPApplication extends Application{
     public void onCreate() {
         super.onCreate();
 
-        LogUtil.i( "onCreate");
+        LogUtil.i("onCreate");
 
         sContext = getApplicationContext();
         sMainThreadId = android.os.Process.myTid();
+        sMainHandler = new Handler();
 
-//        LogUtil.setIsDebug(true); // 开启debug模式
+        //        LogUtil.setIsDebug(true); // 开启debug模式
 
-//        BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
-//        bmobIniter.initBmob();
+        //        BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
+        //        bmobIniter.initBmob();
 
     }
 
