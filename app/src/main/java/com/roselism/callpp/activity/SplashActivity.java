@@ -140,6 +140,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         readServerVersionInfo();
+        LogUtil.i("initview");
     }
 
     /**
@@ -213,13 +214,20 @@ public class SplashActivity extends AppCompatActivity {
      */
     void readServerVersionInfo() {
 
+        LogUtil.i("readServerVersionInfo");
         final long startTime = System.currentTimeMillis();
         new Thread() {
             @Override
             public void run() {
+                LogUtil.i("run");
                 Message msg = mHandler.obtainMessage();
                 HttpConnectionHelper.Builder builder = new HttpConnectionHelper.Builder();
-                HttpConnectionHelper helper = builder.setPath("https://github.com/roselism/callpp/blob/simon/update/download.json").build(); // url
+
+                // https://rawgit.com/roselism/callpp/simon/update/download.json 可下载地址
+                // https://github.com/roselism/callpp/blob/simon/update/download.json 原始地址
+                HttpConnectionHelper helper = builder.
+                        setPath("https://rawgit.com/roselism/callpp/simon/update/download.json").
+                        build(); // url
                 try {
                     if (helper.isResponseOk()) {
 
