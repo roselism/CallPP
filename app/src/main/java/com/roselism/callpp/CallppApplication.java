@@ -9,7 +9,7 @@ import com.roselism.callpp.util.LogUtil;
 /**
  * Created by simon on 2016/4/30.
  */
-public class CallPPApplication extends Application {
+public class CallppApplication extends Application {
 
     private static Handler sMainHandler = new Handler();
 

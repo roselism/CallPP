@@ -2,7 +2,7 @@ package com.roselism.callpp.util;
 
 import android.os.Handler;
 
-import com.roselism.callpp.CallPPApplication;
+import com.roselism.callpp.CallppApplication;
 
 /**
  * @创建者 lai
@@ -12,7 +12,7 @@ import com.roselism.callpp.CallPPApplication;
  * @描述 在不同的线程之间切换的工具类
  */
 public class ThreadUtil {
-    public static Handler mHandler = CallPPApplication.getMainHandler();
+    public static Handler mHandler = CallppApplication.getMainHandler();
 
     /**
      * 在UI线程中执行任务
