@@ -7,7 +7,7 @@ import android.os.Handler;
 /**
  * Created by simon on 2016/4/30.
  */
-public class CallppAosdfplication extends Application {
+public class CallppApplication extends Application {
 
     private static Handler sMainHandler = new Handler();
 
@@ -32,6 +32,11 @@ public class CallppAosdfplication extends Application {
         return sMainThreadId;
     }
 
+
+    public static Handler getMainHandler() {
+        return sMainHandler;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,4 +44,5 @@ public class CallppAosdfplication extends Application {
         sContext = getApplicationContext();
         sMainThreadId = android.os.Process.myTid();
     }
+
 }
