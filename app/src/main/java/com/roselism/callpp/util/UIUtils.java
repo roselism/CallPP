@@ -6,7 +6,7 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.roselism.callpp.CallppApplication;
+import com.roselism.callpp.CallppAPPlication;
 
 
 /**
@@ -19,7 +19,7 @@ import com.roselism.callpp.CallppApplication;
 public class UIUtils {
     /**得到一个上下文*/
     public static Context getContext() {
-        return CallppApplication.getContext();
+        return CallppAPPlication.getContext();
     }
 
     /**得到Resouce对象*/
@@ -54,12 +54,12 @@ public class UIUtils {
 
     /**得到主线程的id*/
     public static long getMainThreadId() {
-        return CallppApplication.getMainThreadId();
+        return CallppAPPlication.getMainThreadId();
     }
 
     /**得到主线程中创建一个handler*/
     public static Handler getMainThreadHandler() {
-        return CallppApplication.getMainHandler();
+        return CallppAPPlication.getMainHandler();
     }
 
     /**安全的执行一个task*/
