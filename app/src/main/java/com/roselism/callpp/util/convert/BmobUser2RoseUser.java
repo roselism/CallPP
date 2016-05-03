@@ -17,6 +17,7 @@ public class BmobUser2RoseUser implements Converter<User, RoseUser> {
         user.setUpdateData(parameter.getUpdatedAt());
         user.setType(RoseObject.BMOB_TYPE); // 设置类型
         user.setEmail(parameter.getEmail());
+        user.setPhoneNumber(parameter.getMobilePhoneNumber());
 
         return new RoseUser();
     }

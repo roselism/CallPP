@@ -2,6 +2,9 @@
 <manifest package="com.roselism.callpp"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--读取手机号码 很老的方式-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
     <!-- 允许联网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
