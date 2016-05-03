@@ -29,7 +29,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             Log.d("ApplicationTest", "info.   getLastTimeContacted():" + info.getLastTimeContacted());
             Log.d("ApplicationTest", "info.getHasPhoneNumber():" + info.getHasPhoneNumber());
             Log.d("ApplicationTest", "info.   getContactID():" + info.getContactID());
-            Log.d("ApplicationTest", "info.getPhotoID():" + info.getPhotoID());
+//            Log.d("ApplicationTest", "info.getPhotoID():" + info.getPhotoID());
             Log.d("ApplicationTest", "info.   getPhoto():" + info.getPhoto());
             Log.d("ApplicationTest", info.getLookupKey());
         }

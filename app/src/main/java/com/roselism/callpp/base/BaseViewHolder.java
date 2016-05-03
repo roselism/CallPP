@@ -3,7 +3,6 @@ package com.roselism.callpp.base;
 import android.content.Context;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public abstract class BaseViewHolder<T extends View, V> {
 
-    protected List<V> mDatas = new ArrayList<>();
+    protected List<V> mDatas;
     private   T       mRootView;//根视图
     protected Context mContext;
 
@@ -25,7 +24,12 @@ public abstract class BaseViewHolder<T extends View, V> {
         mContext = context;
         mRootView = initRootView();
         initData();
+        initListener();
         mRootView.setTag(this);
+        bindViewAndData();
+    }
+
+    protected void initListener() {
     }
 
     /**
@@ -36,8 +40,9 @@ public abstract class BaseViewHolder<T extends View, V> {
     /**
      * 初始化数据
      */
-    protected void initData() {
-    }
+    protected abstract void initData() ;
+
+    protected abstract void bindViewAndData();
 
     /**
      * 获取根视图

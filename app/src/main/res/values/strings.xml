@@ -11,4 +11,6 @@
 
     <string name="main_rb_toolbar_home">首页</string>
     <string name="main_rb_toolbar_user">用户设置</string>
+    <string name="contact_menu_call">拨号</string>
+    <string name="contact_menu_edit">编辑</string>
 </resources>

@@ -7,6 +7,8 @@ import com.roselism.callpp.adapter.UserAdapter;
 
 import com.roselism.callpp.base.BaseViewHolder;
 
+import java.util.ArrayList;
+
 /**
  * @创建者 lai
  * @创建时间 2016/4/30
@@ -27,9 +29,15 @@ public class UserViewHolder extends BaseViewHolder<ListView, String> {
     @Override
     protected void initData() {
         ListView listView = getRootView();
+        mDatas = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             mDatas.add("第" + i + "条数据");
         }
         listView.setAdapter(new UserAdapter(mContext, mDatas));
+    }
+
+    @Override
+    protected void bindViewAndData() {
+
     }
 }

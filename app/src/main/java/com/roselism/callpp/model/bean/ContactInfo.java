@@ -17,19 +17,17 @@ public class ContactInfo {
     private long   lastTimeContacted;// 最后通话时间
     private int    hasPhoneNumber;// 是否有号码
     private long   contactID;// 联系人ID
-    private long   photoID;// 联系人头像ID
+    //    private long   photoID;// 联系人头像ID
     private Bitmap photo;// 图片
 
-    public ContactInfo(String displayName, String number, int timesContacted,
-                       long lastTimeContacted, int hasPhoneNumber, long contactID,
-                       long photoID, Bitmap photo, String lookupKey) {
+    public ContactInfo(String displayName, String number, int timesContacted, long lastTimeContacted, int hasPhoneNumber, long contactID, Bitmap photo, String lookupKey) {
         this.displayName = displayName;
         this.number = number;
         this.timesContacted = timesContacted;
         this.lastTimeContacted = lastTimeContacted;
         this.hasPhoneNumber = hasPhoneNumber;
         this.contactID = contactID;
-        this.photoID = photoID;
+        //        this.photoID = photoID;
         this.photo = photo;
         this.lookupKey = lookupKey;
     }
@@ -82,13 +80,13 @@ public class ContactInfo {
         this.contactID = contactID;
     }
 
-    public long getPhotoID() {
-        return photoID;
-    }
-
-    public void setPhotoID(long photoID) {
-        this.photoID = photoID;
-    }
+    //    public long getPhotoID() {
+    //        return photoID;
+    //    }
+    //
+    //    public void setPhotoID(long photoID) {
+    //        this.photoID = photoID;
+    //    }
 
     public Bitmap getPhoto() {
         return photo;
@@ -101,4 +99,19 @@ public class ContactInfo {
     public String getLookupKey() {
         return lookupKey;
     }
+
+    @Override
+    public String toString() {
+        return "ContactInfo{" +
+                "lookupKey='" + lookupKey + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", number='" + number + '\'' +
+                ", timesContacted=" + timesContacted +
+                ", lastTimeContacted=" + lastTimeContacted +
+                ", hasPhoneNumber=" + hasPhoneNumber +
+                ", contactID=" + contactID +
+                ", photo=" + photo +
+                '}';
+    }
+
 }
