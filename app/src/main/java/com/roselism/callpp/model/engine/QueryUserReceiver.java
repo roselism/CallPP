@@ -3,7 +3,7 @@ package com.roselism.callpp.model.engine;
 import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
-import com.roselism.callpp.model.engine.stragegy.QueryUserByEmailStragegy;
+import com.roselism.callpp.model.engine.stragegy.query.bmob.QueryUserByEmailStragegy;
 import com.roselism.callpp.model.engine.stragegy.StragegyContent;
 import com.roselism.callpp.util.convert.BmobUser2RoseUser;
 import com.roselism.callpp.util.convert.Converter;

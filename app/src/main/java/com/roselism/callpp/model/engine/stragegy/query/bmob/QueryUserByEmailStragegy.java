@@ -1,9 +1,11 @@
-package com.roselism.callpp.model.engine.stragegy;
+package com.roselism.callpp.model.engine.stragegy.query.bmob;
 
 import android.content.Context;
 
 import com.roselism.callpp.CallppApplication;
 import com.roselism.callpp.model.domain.bmob.User;
+import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
+import com.roselism.callpp.model.engine.stragegy.Stragegy;
 import com.roselism.callpp.util.LogUtil;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
 /**
+ * 查询bmob下的某个用户
  * Created by simon on 2016/4/30.
  */
 public class QueryUserByEmailStragegy implements Stragegy<User> {

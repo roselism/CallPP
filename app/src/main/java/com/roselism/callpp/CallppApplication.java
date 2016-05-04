@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
-import com.roselism.callpp.util.LogUtil;
-
 /**
  * Created by simon on 2016/4/30.
  */
@@ -34,14 +32,14 @@ public class CallppApplication extends Application {
         return sMainThreadId;
     }
 
+    public static Handler getMainHandler() {
+        return sMainHandler;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
         sMainThreadId = android.os.Process.myTid();
-    }
-
-    public static Handler getMainHandler() {
-        return sMainHandler;
     }
 }
