@@ -10,6 +10,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "0.1.0"
+        
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -19,6 +23,10 @@ android {
     }
     dexOptions {
         incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

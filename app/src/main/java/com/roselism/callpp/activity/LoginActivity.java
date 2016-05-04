@@ -50,13 +50,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         initView();
         initEvent();
         initData();
+
+//        List<String> list = new ArrayList<>();
+//        Collections.sort(list, (s1, s2) -> s1.compareTo(s2));
     }
 
     void initView() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Bmob.initialize(this, "5b3be373e078b301e82d410c7e207e1d"); // 初始化bmob
-//        Log.i(TAG, "initView: ");
+
         try {
             LogUtil.i("mob -> appkey = " + ConfigUtil.getAppKey("mob"));
         } catch (XmlPullParserException e) {
