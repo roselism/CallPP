@@ -1,4 +1,4 @@
-package com.roselism.callpp.model;
+package com.roselism.callpp.model.observer;
 
 /**
  * @创建者 lai

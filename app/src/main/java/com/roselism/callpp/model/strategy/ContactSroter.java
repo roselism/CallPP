@@ -1,7 +1,8 @@
-package com.roselism.callpp.model;
+package com.roselism.callpp.model.strategy;
 
 import com.roselism.callpp.model.bean.ContactInfo;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @更新时间 2016/5/3 23:28
  * @描述 提供联系人排序的算法
  */
-public class ContactContext {
+public class ContactSroter {
     public static final int NUMBER_MODE  = 0;//根据电话号码进行排序
     public static final int CHINESE_MODE = 1;
 
@@ -26,11 +27,12 @@ public class ContactContext {
     public void sortContacts(List<ContactInfo> contactInfos, int mode) {
         switch (mode) {
             case CHINESE_MODE:
-                new ChineseSort().sort(contactInfos);
+                ContactInfo.setComparator(new ChineseComparator());
                 break;
             case NUMBER_MODE:
             default:
-                new NumberSort().sort(contactInfos);
+                ContactInfo.setComparator(new NumberComparator());
         }
+        Collections.sort(contactInfos);
     }
 }

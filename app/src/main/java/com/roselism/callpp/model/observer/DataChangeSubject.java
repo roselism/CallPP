@@ -1,4 +1,4 @@
-package com.roselism.callpp.model;
+package com.roselism.callpp.model.observer;
 
 import java.util.ArrayList;
 import java.util.List;
