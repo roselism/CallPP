@@ -49,6 +49,5 @@ public class ProgressEditText extends EditText {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
     }
 }

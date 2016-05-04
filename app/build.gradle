@@ -10,6 +10,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "0.1.0"
+        
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -20,6 +24,16 @@ android {
     dexOptions {
         incremental true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -28,8 +42,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:recyclerview-v7:23.+'
     compile 'com.android.support:cardview-v7:23.+'
-
     compile 'com.jakewharton:butterknife:7.0.1'
-
     compile 'cn.bmob.android:bmob-sdk:3.4.6'
+
+    compile name: 'SMSSDK-2.0.2', ext: 'aar'
+    compile files('libs/MobCommons-2016.0303.1229.jar')
+    compile files('libs/MobTools-2016.0303.1229.jar')
 }

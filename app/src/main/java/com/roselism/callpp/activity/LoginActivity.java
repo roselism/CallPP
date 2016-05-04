@@ -17,8 +17,13 @@ import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
 import com.roselism.callpp.model.engine.QueryUserReceiver;
 import com.roselism.callpp.model.engine.Sender;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
+import com.roselism.callpp.util.ConfigUtil;
 import com.roselism.callpp.util.LogUtil;
 import com.roselism.callpp.util.MatcherUtil;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,18 +50,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         initView();
         initEvent();
         initData();
+
+//        List<String> list = new ArrayList<>();
+//        Collections.sort(list, (s1, s2) -> s1.compareTo(s2));
     }
 
     void initView() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Bmob.initialize(this, "5b3be373e078b301e82d410c7e207e1d"); // 初始化bmob
+
+        try {
+            LogUtil.i("mob -> appkey = " + ConfigUtil.getAppKey("mob"));
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void initEvent() {
         mloginEtEmail.setOnFocusChangeListener(this);
         mloginEtPassword.setOnFocusChangeListener(this); // 给password设置焦点监听器
         mLoginButton.setOnClickListener(this);
+
     }
 
     void initData() {

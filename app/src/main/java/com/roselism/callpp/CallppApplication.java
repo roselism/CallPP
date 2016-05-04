@@ -44,5 +44,4 @@ public class CallppApplication extends Application {
         sContext = getApplicationContext();
         sMainThreadId = android.os.Process.myTid();
     }
-
 }
