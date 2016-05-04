@@ -9,14 +9,15 @@ package com.roselism.callpp.model.engine.stragegy;
 public interface OnOperatListener<R> {
 
     /**
-     * 当成功时回掉
+     * 当操作成功时回调
      *
      * @param t 需要返回的对象
      */
     void onSuccedd(R t);
 
     /**
-     * 当失败时回掉
+     * 当操作失败时回调
+     * 操作不成功
      *
      * @param error 产生的异常
      */

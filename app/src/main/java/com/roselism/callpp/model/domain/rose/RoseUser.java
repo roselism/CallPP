@@ -3,11 +3,11 @@ package com.roselism.callpp.model.domain.rose;
 import android.widget.Toast;
 
 import com.roselism.callpp.CallppApplication;
+import com.roselism.callpp.model.adapter.RoseUser2BmobUser;
 import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.util.LogUtil;
 import com.roselism.callpp.util.convert.Converter;
-import com.roselism.callpp.util.convert.RoseUser2BmobUser;
 
 import cn.bmob.v3.listener.SaveListener;
 
@@ -36,7 +36,33 @@ public class RoseUser extends RoseObject {
      */
     String profileUrl;
 
+    /**
+     * 用户邮箱是否验证
+     */
+    boolean emailVerified;
+
+
+    // 用户的昵称
+    String nickName;
+
+
     public RoseUser() {
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getEmail() {
@@ -72,7 +98,6 @@ public class RoseUser extends RoseObject {
         this.profileUrl = profileUrl;
     }
 
-
     /**
      * 用户的登陆逻辑
      */
@@ -80,7 +105,7 @@ public class RoseUser extends RoseObject {
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
 
-        // bmob user 的登陆逻辑
+        // bmob user 的登陆逻辑，还需要添加别的登录逻辑
         user.login(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() { //登陆成功
@@ -91,9 +116,7 @@ public class RoseUser extends RoseObject {
             @Override
             public void onFailure(int i, String s) { // 登陆失败
                 Toast.makeText(CallppApplication.getContext(), "登陆失败", Toast.LENGTH_SHORT).show(); // 登陆成功
-//                listener.onError(i + " " + s););
                 listener.onSuccedd(false);
-//                Log.i(TAG, "onFailure: ");
                 LogUtil.e(i + " " + s);
             }
         });
@@ -117,7 +140,7 @@ public class RoseUser extends RoseObject {
             }
         });
     }
-    
+
     @Override
     public void update() {
 
