@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.strategy;
+package com.roselism.callpp.model.sortstrategy;
 
 import android.support.annotation.NonNull;
 

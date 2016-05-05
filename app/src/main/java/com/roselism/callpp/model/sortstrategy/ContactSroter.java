@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.strategy;
+package com.roselism.callpp.model.sortstrategy;
 
 import com.roselism.callpp.model.bean.ContactInfo;
 
