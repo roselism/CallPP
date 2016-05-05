@@ -42,6 +42,7 @@ public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> im
         mRecyclerAdapter = new HomeRecyclerAdapter(mDatas);
         recyclerView.setAdapter(mRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+        recyclerView.s
         mRecyclerAdapter.setOnItemClickListener(this);//设置点击事件监听
         mRecyclerAdapter.setOnItemLongClickListener(this);//设置长按事件监听
         DataChangeSubject.getInstance().registerObserver(this);//注册成为观察者
