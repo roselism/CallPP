@@ -11,53 +11,50 @@ import com.roselism.callpp.util.LogUtil;
  */
 public class CallppApplication extends Application {
 
-    private static Handler sMainHandler;
+	private static Handler sMainHandler;
 
-    private static Context sContext;// Application的上下文
-    private static int     sMainThreadId;// 主线程Handler
+	private static Context sContext;// Application的上下文
+	private static int sMainThreadId;// 主线程Handler
 
-    //    @Override
-    //    public void onCreate() {
-    //        super.onCreate();
-    //    }
+	// @Override
+	// public void onCreate() {
+	// super.onCreate();
+	// }
 
+	/**
+	 * 获取context
+	 *
+	 * @return application的context
+	 */
+	public static Context getContext() {
+		return sContext;
+	}
 
-    /**
-     * 获取context
-     *
-     * @return application的context
-     */
-    public static Context getContext() {
-        return sContext;
-    }
+	/**
+	 * 获取主线程ID
+	 *
+	 * @return 主线程ID
+	 */
+	public static int getMainThreadId() {
+		return sMainThreadId;
+	}
 
-    /**
-     * 获取主线程ID
-     *
-     * @return 主线程ID
-     */
-    public static int getMainThreadId() {
-        return sMainThreadId;
-    }
+	@Override
+	public void onCreate() {
+		super.onCreate();
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+		LogUtil.i("onCreate");
 
-        LogUtil.i("onCreate");
+		sContext = getApplicationContext();
+		sMainThreadId = android.os.Process.myTid();
 
-        sContext = getApplicationContext();
-        sMainThreadId = android.os.Process.myTid();
-        sMainHandler = new Handler();
+		sMainHandler = new Handler();
 
-        //        LogUtil.setIsDebug(true); // 开启debug模式
+		// LogUtil.setIsDebug(true); // 开启debug模式
 
-        //        BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
-        //        bmobIniter.initBmob();
+		// BmobIniter bmobIniter = new BmobIniter(sContext); // 初始化bmob全局变量
+		// bmobIniter.initBmob();
 
-    }
+	}
 
-    public static Handler getMainHandler() {
-        return sMainHandler;
-    }
 }

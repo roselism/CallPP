@@ -118,4 +118,5 @@ public class ContactInfo implements Comparable<ContactInfo> {
 	public int compareTo(ContactInfo contactInfo) {
 		return mComparator.compare(this, contactInfo);
 	}
+
 }

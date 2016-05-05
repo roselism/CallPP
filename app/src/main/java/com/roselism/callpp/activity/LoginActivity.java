@@ -73,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         }
     }
 
+
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {

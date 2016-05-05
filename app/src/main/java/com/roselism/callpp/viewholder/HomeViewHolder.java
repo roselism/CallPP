@@ -9,9 +9,9 @@ import android.widget.Toast;
 import com.roselism.callpp.adapter.HomeRecyclerAdapter;
 import com.roselism.callpp.base.BaseViewHolder;
 import com.roselism.callpp.base.RecyclerViewAdapter;
+import com.roselism.callpp.model.bean.ContactInfo;
 import com.roselism.callpp.model.observer.DataChangeObserver;
 import com.roselism.callpp.model.observer.DataChangeSubject;
-import com.roselism.callpp.model.bean.ContactInfo;
 import com.roselism.callpp.util.ContactUtil;
 import com.roselism.callpp.util.ThreadUtils;
 
@@ -22,7 +22,11 @@ import com.roselism.callpp.util.ThreadUtils;
  * @更新时间 2016/4/30 14:27
  * @描述 首页的ViewHolder
  */
-public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> implements RecyclerViewAdapter.OnItemLongClickListener, RecyclerViewAdapter.OnItemClickListener,DataChangeObserver {
+public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo>
+        implements
+        RecyclerViewAdapter.OnItemLongClickListener,
+        RecyclerViewAdapter.OnItemClickListener,
+        DataChangeObserver {
 
     private HomeRecyclerAdapter mRecyclerAdapter;
 
@@ -42,10 +46,9 @@ public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> im
         mRecyclerAdapter = new HomeRecyclerAdapter(mDatas);
         recyclerView.setAdapter(mRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
-        recyclerView.s
-        mRecyclerAdapter.setOnItemClickListener(this);//设置点击事件监听
-        mRecyclerAdapter.setOnItemLongClickListener(this);//设置长按事件监听
-        DataChangeSubject.getInstance().registerObserver(this);//注册成为观察者
+        mRecyclerAdapter.setOnItemClickListener(this);// 设置点击事件监听
+        mRecyclerAdapter.setOnItemLongClickListener(this);// 设置长按事件监听
+        DataChangeSubject.getInstance().registerObserver(this);// 注册成为观察者
     }
 
     @Override
@@ -56,8 +59,8 @@ public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> im
     /**
      * 设置数据
      */
-    private void setData(){
-       mDatas = ContactUtil.getAllLocalContact(mContext);
+    private void setData() {
+        mDatas = ContactUtil.getAllLocalContact(mContext);
     }
 
     @Override
@@ -70,10 +73,9 @@ public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> im
             }
         });
     }
-    @Override
-    public void onItemLongClick(View view, int position) {
-        ContactUtil.callPhone(mDatas.get(position).getNumber());
-        Toast.makeText(mContext, "长按:" + mDatas.get(position), Toast.LENGTH_SHORT).show();
+
+    private void showPopupWindow() {
+
     }
 
     @Override
@@ -82,7 +84,9 @@ public class HomeViewHolder extends BaseViewHolder<RecyclerView, ContactInfo> im
         Toast.makeText(mContext, "点击:" + mDatas.get(position), Toast.LENGTH_SHORT).show();
     }
 
-    private void showPopupWindow() {
-
+    @Override
+    public void onItemLongClick(View view, int position) {
+        ContactUtil.callPhone(mDatas.get(position).getNumber());
+        Toast.makeText(mContext, "长按:" + mDatas.get(position), Toast.LENGTH_SHORT).show();
     }
 }

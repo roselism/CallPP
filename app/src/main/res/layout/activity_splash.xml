@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.roselism.callpp.activity.SplashActivity">
+
+    <!--背景图片-->
+    <ImageView
+        android:id="@+id/bg_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--版本名字-->
+    <TextView
+        android:id="@+id/splash_tv_versionname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="v1.52.5"
+        android:textSize="18sp"/>
+
+    <!--加载进度条-->
+    <ProgressBar
+        android:id="@+id/splash_progress_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splash_tv_versionname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/Component_vertical_margin"/>
+</RelativeLayout>
