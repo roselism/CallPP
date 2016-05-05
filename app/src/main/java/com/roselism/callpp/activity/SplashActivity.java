@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Bind(R.id.bg_image) ImageView mBgImage;
     @Bind(R.id.splash_tv_versionname) TextView mSplashTvVersionname;
-    @Bind(R.id.splash_progress_loading) ProgressBar mSplashProgressLoading;
+    @Bind(R.id.splash_progress_loading) ProgressBar mSplashProgressLoading;//
 
     private int serverVersionCode; // 版本号
     private String serverVersionName; // 版本名字
@@ -72,6 +72,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initView();
         initEvent();
         initData();

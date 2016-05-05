@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorToolbarChecked">#FD5002</color>
     <color name="colorToolbarNormal">#5D646F</color>
-    
+
     <!-- 王镇制造 与具体业务逻辑无关的颜色选项 -->
     <color name="turquoise">#1abb9b</color>
     <color name="green_sea">#16a085</color>
@@ -40,5 +40,4 @@
     <!--黑色区间 不同的透明度-->
     <color name="black">#000000</color>
     <color name="black_15Alpha">#d8000000</color>
-
 </resources>

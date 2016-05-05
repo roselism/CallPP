@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.roselism.callpp"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.roselism.callpp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--读取手机号码 很老的方式-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
@@ -17,6 +18,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+<<<<<<< HEAD
     
     <!-- SMSSDK的权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -28,6 +30,12 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+=======
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+>>>>>>> lai
 
     <application
         android:name=".CallppApplication"

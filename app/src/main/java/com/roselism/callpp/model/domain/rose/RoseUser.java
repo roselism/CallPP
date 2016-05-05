@@ -5,7 +5,6 @@ import android.widget.Toast;
 import com.roselism.callpp.CallppApplication;
 import com.roselism.callpp.model.adapter.RoseUser2BmobUser;
 import com.roselism.callpp.model.domain.bmob.User;
-import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.util.LogUtil;
 import com.roselism.callpp.util.convert.Converter;
 
@@ -15,17 +14,10 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by simon on 2016/4/30.
  */
 public class RoseUser extends RoseObject {
-
-    /**
-     * 用户邮箱
-     */
     String email;
-
-    /**
-     * 用户密码
-     */
     String password;
 
+<<<<<<< HEAD
     /**
      * 用户的电话
      */
@@ -46,6 +38,8 @@ public class RoseUser extends RoseObject {
     String nickName;
 
 
+=======
+>>>>>>> lai
     public RoseUser() {
     }
 
@@ -101,23 +95,28 @@ public class RoseUser extends RoseObject {
     /**
      * 用户的登陆逻辑
      */
-    public void login(final OnOperatListener<Boolean> listener) {
+    public void login() {
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
+<<<<<<< HEAD
 
         // bmob user 的登陆逻辑，还需要添加别的登录逻辑
+=======
+>>>>>>> lai
         user.login(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() { //登陆成功
                 Toast.makeText(CallppApplication.getContext(), "登陆成功", Toast.LENGTH_SHORT).show(); // 登陆成功
-                listener.onSuccedd(true);
             }
 
             @Override
             public void onFailure(int i, String s) { // 登陆失败
                 Toast.makeText(CallppApplication.getContext(), "登陆失败", Toast.LENGTH_SHORT).show(); // 登陆成功
+<<<<<<< HEAD
                 listener.onSuccedd(false);
                 LogUtil.e(i + " " + s);
+=======
+>>>>>>> lai
             }
         });
     }
@@ -143,6 +142,7 @@ public class RoseUser extends RoseObject {
 
     @Override
     public void update() {
+
 
     }
 

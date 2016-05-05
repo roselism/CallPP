@@ -2,7 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-
-    <!--组件之间的垂直距离-->
-    <dimen name="Component_vertical_margin">6dp</dimen>
+    <!--联系人姓名字体大小-->
+    <dimen name="phone_name_size">20sp</dimen>
+    <dimen name="phone_number_size">16sp</dimen>
+    <!--联系人电话字体大小-->
 </resources>
