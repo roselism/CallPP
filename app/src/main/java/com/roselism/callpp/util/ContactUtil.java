@@ -75,7 +75,7 @@ public class ContactUtil {
     @NonNull
     private static List<ContactInfo> getContacts(Context context, Uri uri) {
         ContentResolver resolver = context.getContentResolver();
-        Cursor cursor = resolver.query(uri, CONTACT_PROJECTION, null, null, "name asc", null);
+        Cursor cursor = resolver.query(uri, CONTACT_PROJECTION, null, null, "display_name asc", null);
         List<ContactInfo> list = new ArrayList<>();
         if (cursor != null) {
             while (cursor.moveToNext()) {
