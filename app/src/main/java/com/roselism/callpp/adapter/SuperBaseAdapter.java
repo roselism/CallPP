@@ -1,9 +1,11 @@
-package com.roselism.callpp.base;
+package com.roselism.callpp.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.roselism.callpp.adapter.viewholder.BaseViewHolder;
 
 import java.util.List;
 

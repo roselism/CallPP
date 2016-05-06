@@ -6,8 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.base.RecyclerViewAdapter;
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 import com.roselism.callpp.util.UIUtils;
 
 import java.util.List;
