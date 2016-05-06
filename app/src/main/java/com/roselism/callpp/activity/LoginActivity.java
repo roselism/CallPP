@@ -27,7 +27,8 @@ import cn.bmob.v3.Bmob;
  * @author simon wang
  * @version 1.0
  */
-public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements
+        View.OnFocusChangeListener, View.OnClickListener {
 
     private final static int LOGIN_ACTION = 1; // 登陆操作
     private final static int SIGNUP_ACTION = 2; // 注册操作
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     @Bind(R.id.login_et_email) EditText mloginEtEmail;
     @Bind(R.id.login_et_password) EditText mloginEtPassword;
     @Bind(R.id.login_et_password_again) EditText mloginEtPwdAgain;
-    @Bind(R.id.login_button) Button mLoginButton;
+    @Bind(R.id.btn_login) Button mbtnLogin;
     @Bind(R.id.profile) ImageView mProfile; // 用户的头像
 
     @Override
@@ -54,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
 
     void initEvent() {
         mloginEtPassword.setOnFocusChangeListener(this); // 给password设置焦点监听器
-        mLoginButton.setOnClickListener(this);
+        mbtnLogin.setOnClickListener(this);
     }
 
     void initData() {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_button: // 注册逻辑
+            case R.id.btn_login: // 注册逻辑
                 if (flag == LOGIN_ACTION)
                     login();
                 else if (flag == SIGNUP_ACTION)
@@ -72,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
                 break;
         }
     }
-
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
@@ -170,16 +170,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
      * 显示登陆逻辑的组件
      */
     private void showLoginComponent() {
-        mLoginButton.setText(getResources().getString(R.string.login_login_button)); //显示登陆
+        mbtnLogin.setText(getResources().getString(R.string.login_login_button)); //显示登陆
+        mloginEtPwdAgain.setVisibility(View.INVISIBLE); // 二次密码框消失
     }
 
     /**
      * 显示注册界面的组件
      */
     private void showSignUpComponent() {
-        mLoginButton.setText(getResources().getString(R.string.login_signup_button));
+        mbtnLogin.setText(getResources().getString(R.string.login_signup_button));
         mloginEtPwdAgain.setVisibility(View.VISIBLE); // 显示二次密码
     }
-
-
 }

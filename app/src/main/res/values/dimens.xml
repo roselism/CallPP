@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!--联系人姓名字体大小-->
     <dimen name="phone_name_size">20sp</dimen>
-    <dimen name="phone_number_size">16sp</dimen>
     <!--联系人电话字体大小-->
+    <dimen name="phone_number_size">16sp</dimen>
+    <dimen name="Component_vertical_margin">20dp</dimen>
 </resources>

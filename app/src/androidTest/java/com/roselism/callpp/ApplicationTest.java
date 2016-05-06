@@ -5,8 +5,12 @@ import android.test.ApplicationTestCase;
 import android.util.Log;
 
 import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.util.ConfigUtil;
 import com.roselism.callpp.util.ContactUtil;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,6 +20,16 @@ import java.util.List;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
+    }
+
+    public void testGetAppKey() {
+        try {
+            assertEquals("125fd0563b954", ConfigUtil.getAppKey("mob"));
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 测试本地联系人是否获取成功
@@ -29,9 +43,10 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             Log.d("ApplicationTest", "info.   getLastTimeContacted():" + info.getLastTimeContacted());
             Log.d("ApplicationTest", "info.getHasPhoneNumber():" + info.getHasPhoneNumber());
             Log.d("ApplicationTest", "info.   getContactID():" + info.getContactID());
-//            Log.d("ApplicationTest", "info.getPhotoID():" + info.getPhotoID());
+            //            Log.d("ApplicationTest", "info.getPhotoID():" + info.getPhotoID());
             Log.d("ApplicationTest", "info.   getPhoto():" + info.getPhoto());
             Log.d("ApplicationTest", info.getLookupKey());
         }
     }
+
 }

@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final static int ENTER_HOME = 1; // 进入主界面
+    private final static int CODE_ENTER_HOME = 1; // 进入主界面
     private final static int CODE_JSON_ERROR = 2; // json解析错误
     private final static int CODE_IO_ERROR = 3; //
     private final static int CODE_READ_FINISHED = 4; // 读取完毕
@@ -48,17 +48,19 @@ public class SplashActivity extends AppCompatActivity {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+
+            // 到达这里一定是程序已经运行了两秒之后的
             switch (msg.what) {
-                case ENTER_HOME:
+                case CODE_ENTER_HOME: // 进入主界面
+                    enterHome();
                     break;
-                case CODE_JSON_ERROR:
-                    LogUtil.i("json error");
+                case CODE_JSON_ERROR: // json 解析错误
+                    enterHome();
                     break;
-                case CODE_IO_ERROR:
-                    LogUtil.i("io error");
+                case CODE_IO_ERROR: // 网络链接错误
+                    enterHome();
                     break;
-                case CODE_READ_FINISHED:
-                    LogUtil.i("read finished");
+                case CODE_READ_FINISHED: // 读取完毕
                     checkUpdate();
                     break;
             }
@@ -89,7 +91,6 @@ public class SplashActivity extends AppCompatActivity {
                         try {
                             download();
                         } catch (IOException e) {
-                            LogUtil.i(e.getLocalizedMessage());
                             e.printStackTrace();
                         }
                     }
@@ -141,6 +142,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         readServerVersionInfo();
+        LogUtil.i("initview");
     }
 
     /**
@@ -157,22 +159,6 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 读取当前app的版本名字
-     *
-     * @return 如果有则返回当前的版本名字，如果没有，则返回""
-     */
-    protected String readVersionName() {
-        PackageManager manager = getPackageManager();
-        String versionName = "";
-        try {
-            PackageInfo info = manager.getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
-            versionName = info.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return versionName;
-    }
 
     /**
      * 进入主界面
@@ -189,6 +175,8 @@ public class SplashActivity extends AppCompatActivity {
     public void checkUpdate() {
         if (serverVersionCode > readVersionCode()) { // 有更新版本
             buildDialog(); // 创建一个dialog
+        } else { // 当前版本号与服务器相同，直接进入主界面
+            enterHome();
         }
     }
 
@@ -209,41 +197,52 @@ public class SplashActivity extends AppCompatActivity {
         return versionCode;
     }
 
+
+    /**
+     * 读取当前app的版本名字
+     *
+     * @return 如果有则返回当前的版本名字，如果没有，则返回""
+     */
+    protected String readVersionName() {
+        PackageManager manager = getPackageManager();
+        String versionName = "";
+        try {
+            PackageInfo info = manager.getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
+            versionName = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionName;
+    }
+
     /**
      * 读取服务器端的版本信息
      */
     void readServerVersionInfo() {
 
+        LogUtil.i("readServerVersionInfo");
         final long startTime = System.currentTimeMillis();
         new Thread() {
             @Override
             public void run() {
+                LogUtil.i("run");
                 Message msg = mHandler.obtainMessage();
+                String url = "url";
                 HttpConnectionHelper.Builder builder = new HttpConnectionHelper.Builder();
-                HttpConnectionHelper helper = builder.setPath("https://github.com/roselism/callpp/blob/simon/update/download.json").build(); // url
+                HttpConnectionHelper helper = builder.setPath(url).build(); // url
                 try {
-                    if (helper.isResponseOk()) {
-
-                        InStream2String inStream2String = new InStream2String(); // 声明一个转换器
-                        String context = inStream2String.convert(helper.getConnection().getInputStream()); // 转换成String
-                        JSONObject jsonObject = new JSONObject(context);
-
-                        serverVersionName = jsonObject.getString("versionName"); // 版本名
-                        serverVersionCode = jsonObject.getInt("versionCode"); // 版本号
-                        desc = jsonObject.getString("desc"); // 版本描述
-                        downloadUrl = jsonObject.getString("downloadLink"); // 下载链接
-
+                    if (helper.isResponseOk()) { // 回应200 链接正常
+                        parseJson(helper); // 解析Json数据
                         msg.what = CODE_READ_FINISHED;
-                    } else {
+                    } else { // 回应其他 what设置为进入主界面
                         LogUtil.i(helper.responseCode() + "");
+                        msg.what = CODE_ENTER_HOME;
                     }
-                } catch (IOException e) {
+                } catch (IOException e) { // 网络连接错误
                     msg.what = CODE_IO_ERROR;
                     e.printStackTrace();
-                    // 网络连接错误
-                } catch (JSONException e) {
+                } catch (JSONException e) { // json 解析错误
                     msg.what = CODE_JSON_ERROR;
-                    // json 解析错误
                     e.printStackTrace();
                 } finally {
                     long endTime = System.currentTimeMillis();
@@ -257,6 +256,23 @@ public class SplashActivity extends AppCompatActivity {
                     }
                     mHandler.sendMessage(msg); // handler 发送message
                 }
+            }
+
+            /**
+             * 解析 从网络得到的json数据
+             * @param helper 网络链接帮助器
+             * @throws IOException
+             * @throws JSONException
+             */
+            private void parseJson(HttpConnectionHelper helper) throws IOException, JSONException {
+                InStream2String inStream2String = new InStream2String(); // 声明一个转换器
+                String context = inStream2String.convert(helper.getConnection().getInputStream()); // 转换成String
+                JSONObject jsonObject = new JSONObject(context); // json解析对象
+
+                serverVersionName = jsonObject.getString("versionName"); // 版本名
+                serverVersionCode = jsonObject.getInt("versionCode"); // 版本号
+                desc = jsonObject.getString("desc"); // 版本描述
+                downloadUrl = jsonObject.getString("downloadLink"); // 下载链接
             }
         }.start();
     }
