@@ -1,11 +1,6 @@
-package com.roselism.callpp.factory;
+package com.roselism.callpp.adapter.viewholder;
 
 import android.content.Context;
-
-import com.roselism.callpp.viewholder.HomeViewHolder;
-import com.roselism.callpp.viewholder.UserViewHolder;
-
-import com.roselism.callpp.base.BaseViewHolder;
 
 /**
  * @创建者 lai

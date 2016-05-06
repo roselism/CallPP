@@ -1,6 +1,6 @@
-package com.roselism.callpp.model.sortstrategy;
+package com.roselism.callpp.local.sortstrategy;
 
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 
 import java.util.Collections;
 import java.util.List;

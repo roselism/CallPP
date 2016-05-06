@@ -4,7 +4,7 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 import android.util.Log;
 
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 import com.roselism.callpp.util.ConfigUtil;
 import com.roselism.callpp.util.ContactUtil;
 

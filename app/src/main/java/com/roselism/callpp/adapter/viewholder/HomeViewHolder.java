@@ -1,4 +1,4 @@
-package com.roselism.callpp.viewholder;
+package com.roselism.callpp.adapter.viewholder;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.roselism.callpp.adapter.HomeRecyclerAdapter;
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.base.RecyclerViewAdapter;
-import com.roselism.callpp.model.bean.ContactInfo;
-import com.roselism.callpp.model.observer.DataChangeObserver;
-import com.roselism.callpp.model.observer.DataChangeSubject;
+import com.roselism.callpp.adapter.RecyclerViewAdapter;
+import com.roselism.callpp.local.bean.ContactInfo;
+import com.roselism.callpp.local.observer.DataChangeObserver;
+import com.roselism.callpp.local.observer.DataChangeSubject;
 import com.roselism.callpp.util.ContactUtil;
 import com.roselism.callpp.util.ThreadUtils;
 

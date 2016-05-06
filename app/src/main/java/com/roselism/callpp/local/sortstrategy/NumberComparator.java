@@ -1,8 +1,8 @@
-package com.roselism.callpp.model.sortstrategy;
+package com.roselism.callpp.local.sortstrategy;
 
 import android.support.annotation.NonNull;
 
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 
 import java.util.Comparator;
 import java.util.List;

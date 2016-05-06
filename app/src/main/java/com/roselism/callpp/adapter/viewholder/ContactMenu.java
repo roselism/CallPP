@@ -1,12 +1,11 @@
-package com.roselism.callpp.menu;
+package com.roselism.callpp.adapter.viewholder;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 import com.roselism.callpp.util.ContactUtil;
 
 import butterknife.Bind;

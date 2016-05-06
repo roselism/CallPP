@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.bean;
+package com.roselism.callpp.local.bean;
 
 import android.graphics.Bitmap;
 

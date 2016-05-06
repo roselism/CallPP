@@ -5,8 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.factory.ViewHolderFactory;
+import com.roselism.callpp.adapter.viewholder.BaseViewHolder;
+import com.roselism.callpp.adapter.viewholder.ViewHolderFactory;
 
 /**
  * @创建者 lai

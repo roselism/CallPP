@@ -3,8 +3,7 @@ package com.roselism.callpp.adapter;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.base.SuperBaseAdapter;
+import com.roselism.callpp.adapter.viewholder.BaseViewHolder;
 
 import java.util.List;
 

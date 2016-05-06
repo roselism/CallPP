@@ -15,7 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.model.bean.ContactInfo;
+import com.roselism.callpp.local.bean.ContactInfo;
 
 import java.io.InputStream;
 import java.util.ArrayList;
