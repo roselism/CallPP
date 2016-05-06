@@ -10,10 +10,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "0.1.0"
-        
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -24,10 +20,6 @@ android {
     dexOptions {
         incremental true
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 repositories {
@@ -37,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:recyclerview-v7:23.+'
@@ -45,5 +37,4 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'cn.bmob.android:bmob-sdk:3.4.6'
     compile 'com.belerweb:pinyin4j:2.5.1'
-    compile project(':roseutil')
 }
