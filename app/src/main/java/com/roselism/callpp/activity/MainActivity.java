@@ -20,9 +20,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        initViews();
         initListener();
         initData();
+    }
+
+    initViews(){
+
     }
 
     /**

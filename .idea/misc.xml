@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
     <option name="id" value="1454271540553" />
@@ -8,8 +7,6 @@
     <option name="pathToConfigFileJava" value="$PROJECT_DIR$/../../workspace/day1106IO/.settings/org.eclipse.jdt.core.prefs" />
     <option name="useOldEclipseJavaFormatter" value="true" />
   </component>
-=======
->>>>>>> e4ff953453b110a56ccc6ee2059604ed86259c0a
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
@@ -47,36 +44,10 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-<<<<<<< HEAD
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
-=======
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
->>>>>>> e4ff953453b110a56ccc6ee2059604ed86259c0a
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="Android API 23 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
-<<<<<<< HEAD
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\lai\AppData\Roaming\Subversion</configuration>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.7</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
-  </component>
-=======
->>>>>>> e4ff953453b110a56ccc6ee2059604ed86259c0a
 </project>
