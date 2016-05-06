@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+
+    <!--mob 的配置文件-->
+    <config>
+        <name>
+            mob
+        </name>
+        <appkey>
+            125fd0563b954
+        </appkey>
+        <AppSecret>
+            a7594cc080c5fc58ea4c01db17af15dd
+        </AppSecret>
+    </config>
+
+</configs>

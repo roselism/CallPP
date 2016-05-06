@@ -11,10 +11,10 @@ import com.roselism.callpp.adapter.ContentPagerAdapter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
-    @Bind(R.id.main_rg_toolbar) RadioGroup mRgToolbar;
-    @Bind(R.id.main_viewpager_content) ViewPager mViewpagerContent;
+    @Bind(R.id.main_rg_toolbar)        RadioGroup mRgToolbar;
+    @Bind(R.id.main_viewpager_content) ViewPager  mViewpagerContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      */
     private void initListener() {
         mRgToolbar.setOnCheckedChangeListener(this);
+        mViewpagerContent.addOnPageChangeListener(this);
     }
 
     /**
@@ -39,17 +40,60 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mViewpagerContent.setAdapter(new ContentPagerAdapter(this, mRgToolbar.getChildCount()));
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
+    /**
+     * 把RadioButton的ID转换成索引
+     *
+     * @param rbId 要转换的ID
+     *
+     * @return RadioButton相对Toolbar的索引
+     */
+    private int rbId2Index(int rbId) {
+        switch (rbId) {
             case R.id.main_rb_toolbar_home:
-                mViewpagerContent.setCurrentItem(0);
-                break;
+                return 0;
             case R.id.main_rb_toolbar_user:
-                mViewpagerContent.setCurrentItem(1);
-                break;
+                return 1;
             default:
                 throw new RuntimeException("点击Toolbar时出现错误");
         }
     }
+    /**
+     * 把索引转换成RadioButton的ID
+     *
+     * @param index 要转换的索引
+     *
+     * @return RadioButton的ID
+     */
+    private int index2RbId(int index) {
+        switch (index) {
+            case 0:
+                return R.id.main_rb_toolbar_home;
+            case 1:
+                return R.id.main_rb_toolbar_user;
+            default:
+                throw new RuntimeException("没有找到对应的RadioButton");
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        mViewpagerContent.setCurrentItem(rbId2Index(checkedId));
+    }
+
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mRgToolbar.check(index2RbId(position));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
 }

@@ -3,11 +3,11 @@ package com.roselism.callpp.base;
 import android.content.Context;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @param <T> View的子类,可以指定ViewHolder中要返回的根视图
+ *
  * @创建者 lai
  * @创建时间 2016/4/30
  * @packageName base
@@ -16,15 +16,20 @@ import java.util.List;
  */
 public abstract class BaseViewHolder<T extends View, V> {
 
-    protected List<V> mDatas = new ArrayList<>();
+    protected List<V> mDatas;
+    private   T       mRootView;//根视图
     protected Context mContext;
-    private T mRootView;//根视图
 
     public BaseViewHolder(Context context) {
         mContext = context;
         mRootView = initRootView();
         initData();
+        initListener();
         mRootView.setTag(this);
+        bindViewAndData();
+    }
+
+    protected void initListener() {
     }
 
     /**
@@ -35,8 +40,9 @@ public abstract class BaseViewHolder<T extends View, V> {
     /**
      * 初始化数据
      */
-    protected void initData() {
-    }
+    protected abstract void initData() ;
+
+    protected abstract void bindViewAndData();
 
     /**
      * 获取根视图

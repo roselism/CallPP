@@ -1,6 +1,5 @@
 package com.roselism.callpp.util.io;
 
-
 import com.roselism.callpp.util.convert.InStream2String;
 
 import java.io.IOException;

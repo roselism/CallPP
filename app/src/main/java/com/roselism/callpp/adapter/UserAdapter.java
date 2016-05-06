@@ -44,5 +44,15 @@ public class UserAdapter extends SuperBaseAdapter<UserAdapter.ViewHolder,String>
         protected TextView initRootView() {
             return new TextView(mContext);
         }
+
+        @Override
+        protected void initData() {
+
+        }
+
+        @Override
+        protected void bindViewAndData() {
+
+        }
     }
 }

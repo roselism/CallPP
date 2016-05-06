@@ -1,14 +1,13 @@
 package com.roselism.callpp.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.roselism.callpp.R;
 import com.roselism.callpp.base.RecyclerViewAdapter;
+import com.roselism.callpp.model.bean.ContactInfo;
 import com.roselism.callpp.util.UIUtils;
 
 import java.util.List;
@@ -22,51 +21,50 @@ import butterknife.Bind;
  * @更新时间 2016/4/30 22:41
  * @描述 首页的RecyclerView的适配器
  */
-public class HomeRecyclerAdapter extends RecyclerViewAdapter<String> {
-    public HomeRecyclerAdapter(List<String> datas) {
-        super(datas);
-    }
+public class HomeRecyclerAdapter extends RecyclerViewAdapter<ContactInfo> {
+	public HomeRecyclerAdapter(List<ContactInfo> datas) {
+		super(datas);
+	}
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_recycler_home, parent, false);
-        return new HomeViewHolder(v);
-    }
+	@Override
+	protected RecyclerView.ViewHolder getViewHolder(ViewGroup parent) {
+		return new HomeViewHolder(parent);
+	}
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        HomeViewHolder viewHolder = (HomeViewHolder) holder;
-        viewHolder.mPhoneNumber.setText(mDatas.get(position));
-        viewHolder.mPhoto.setImageResource(R.mipmap.profile2);
-    }
+	/**
+	 * 首页显示联系人的ViewHolder
+	 */
+	public class HomeViewHolder extends ViewHolder {
 
-    public class HomeViewHolder extends RecyclerViewAdapter.ViewHolder implements View.OnLongClickListener {
+		@Bind(R.id.main_item_img_photo)
+		ImageView mPhoto;
+		@Bind(R.id.main_item_tv_name)
+		TextView mTvName;
+		@Bind(R.id.main_item_tv_number)
+		TextView mTvNumber;
 
-        @Bind(R.id.main_item_tv_phonenumber) public TextView mPhoneNumber;
-        @Bind(R.id.main_item_img_photo) public ImageView mPhoto;
+		public HomeViewHolder(ViewGroup parent) {
+			super(R.layout.item_recycler_home, parent);
+			setItemHeight();
+		}
 
-        public HomeViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnLongClickListener(this);
-            setItemHeight();
-        }
+		/**
+		 * 设置Item的高度
+		 */
+		private void setItemHeight() {
+			ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
+			layoutParams.width = UIUtils.getScreenSize().x / 3;
+			layoutParams.height = UIUtils.getScreenSize().x / 3;
+			itemView.setLayoutParams(layoutParams);
+		}
 
-        /**
-         * 设置Item的高度
-         */
-        private void setItemHeight() {
-            ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
-            layoutParams.width = UIUtils.getScreenSize().x / 3;
-            layoutParams.height = UIUtils.getScreenSize().x / 3;
-            itemView.setLayoutParams(layoutParams);
-        }
+		@Override
+		public void bindData(int position) {
+			ContactInfo contactInfo = mDatas.get(position);
+			mPhoto.setImageBitmap(contactInfo.getPhoto());
+			mTvName.setText(contactInfo.getDisplayName());
+			mTvNumber.setText(contactInfo.getNumber());
+		}
 
-        @Override
-        public boolean onLongClick(View v) {
-            if (mItemLongClickListener != null) {
-                mItemLongClickListener.onItemClick(v, getAdapterPosition());
-            }
-            return true;
-        }
-    }
+	}
 }
