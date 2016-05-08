@@ -13,7 +13,9 @@ import java.util.List;
  * @packageName com.roselism.callpp.adapter
  * @更新时间 2016/4/30 15:22
  * @描述 TODO
+ * @deprecated 由于ListView 替换成RecyclerView所以该类弃用
  */
+@Deprecated
 public class UserAdapter extends SuperBaseAdapter<UserAdapter.ViewHolder,String> {
 
     public UserAdapter(Context context, List<String> data) {
@@ -42,16 +44,6 @@ public class UserAdapter extends SuperBaseAdapter<UserAdapter.ViewHolder,String>
         @Override
         protected TextView initRootView() {
             return new TextView(mContext);
-        }
-
-        @Override
-        protected void initData() {
-
-        }
-
-        @Override
-        protected void bindViewAndData() {
-
         }
     }
 }

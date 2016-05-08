@@ -95,11 +95,11 @@ public class ContactUtil {
                 Bitmap contactPhoto = null;
                 // photoid 大于0 表示联系人有头像 如果没有给此人设置头像则给他一个默认的
                 if (photoID > 0) {
-                    Uri phontoUri = ContentUris.withAppendedId(                            ContactsContract.Contacts.CONTENT_URI, contactID);
-                    InputStream input = ContactsContract.Contacts                            .openContactPhotoInputStream(resolver, phontoUri);
+                    Uri photoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactID);
+                    InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(resolver, photoUri);
                     contactPhoto = BitmapFactory.decodeStream(input);
                 } else {
-                    contactPhoto = BitmapFactory.decodeResource(                            UIUtils.getResources(), R.mipmap.ic_contact);
+                    contactPhoto = BitmapFactory.decodeResource(UIUtils.getResources(), R.mipmap.ic_contact);
                 }
                 // 把联系人信息封装到集合中
                 ContactInfo contactInfo = new ContactInfo(name, number,

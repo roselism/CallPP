@@ -1,14 +1,13 @@
 package com.roselism.callpp.adapter.viewholder;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.roselism.callpp.R;
 import com.roselism.callpp.local.bean.ContactInfo;
 import com.roselism.callpp.util.ContactUtil;
-
-import butterknife.Bind;
+import com.roselism.callpp.view.ContactMenuItemView;
 
 /**
  * @创建者 lai
@@ -18,9 +17,10 @@ import butterknife.Bind;
  * @描述 联系人弹出的对话框的列表
  */
 public class ContactMenu extends BaseViewHolder implements View.OnClickListener {
-    private final                 ContactInfo mContactInfo;
-    @Bind(R.id.contact_menu_call) TextView    mContactMenuCall;
-    @Bind(R.id.contact_menu_edit) TextView    mContactMenuEdit;
+    private final ContactInfo         mContactInfo;
+    private       ContactMenuItemView mContactMenuCall;
+    private       ContactMenuItemView mContactMenuEdit;
+    private       OnItemClickListener mListener;
 
     public ContactMenu(Context context, ContactInfo contactInfo) {
         super(context);
@@ -29,22 +29,17 @@ public class ContactMenu extends BaseViewHolder implements View.OnClickListener 
 
     @Override
     protected View initRootView() {
-        return View.inflate(mContext, R.layout.menu_contact, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.menu_contact, null);
+        mContactMenuCall = (ContactMenuItemView) view.findViewById(R.id.contact_menu_call);
+        mContactMenuEdit = (ContactMenuItemView) view.findViewById(R.id.contact_menu_edit);
+        return view;
     }
 
-    @Override
-    protected void initData() {
-    }
 
     @Override
     protected void initListener() {
         mContactMenuCall.setOnClickListener(this);
         mContactMenuEdit.setOnClickListener(this);
-    }
-
-    @Override
-    protected void bindViewAndData() {
-
     }
 
     @Override
@@ -59,5 +54,15 @@ public class ContactMenu extends BaseViewHolder implements View.OnClickListener 
             default:
                 break;
         }
+        mListener.onItemClick();
     }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick();
+    }
+
 }

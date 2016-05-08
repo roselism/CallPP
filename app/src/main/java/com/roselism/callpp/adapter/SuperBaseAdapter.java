@@ -15,13 +15,15 @@ import java.util.List;
  * @packageName com.roselism.callpp.adapter
  * @更新时间 2016/4/30 15:27
  * @描述 TODO
+ * @deprecated 由于ListView 替换成RecyclerView所以该类弃用
  */
-public abstract class SuperBaseAdapter<E extends BaseViewHolder,T> extends BaseAdapter {
-    protected Context mContext;
-    protected List<T> mData;
+@Deprecated
+public abstract class SuperBaseAdapter<VIEWHOLDER extends BaseViewHolder, DATA> extends BaseAdapter {
+    protected Context    mContext;
+    protected List<DATA> mData;
 
 
-    public SuperBaseAdapter(Context context, List<T> data) {
+    public SuperBaseAdapter(Context context, List<DATA> data) {
         mContext = context;
         mData = data;
     }
@@ -46,15 +48,15 @@ public abstract class SuperBaseAdapter<E extends BaseViewHolder,T> extends BaseA
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        E holder;
+        VIEWHOLDER holder;
         if (convertView == null) {
             holder = initViewHolder();
             convertView = holder.getRootView();
             convertView.setTag(holder);
         } else {
-            holder = (E) convertView.getTag();
+            holder = (VIEWHOLDER) convertView.getTag();
         }
-        bindData(holder,position);
+        bindData(holder, position);
         return convertView;
     }
 
@@ -64,12 +66,12 @@ public abstract class SuperBaseAdapter<E extends BaseViewHolder,T> extends BaseA
      * @param holder
      * @param position
      */
-    protected abstract void bindData(E holder, int position);
+    protected abstract void bindData(VIEWHOLDER holder, int position);
 
     /**
      * 初始化根视图的ViewHolder
      *
      * @return
      */
-    protected abstract E initViewHolder();
+    protected abstract VIEWHOLDER initViewHolder();
 }

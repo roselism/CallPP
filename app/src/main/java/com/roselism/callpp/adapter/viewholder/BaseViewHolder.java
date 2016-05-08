@@ -6,7 +6,7 @@ import android.view.View;
 import java.util.List;
 
 /**
- * @param <T> View的子类,可以指定ViewHolder中要返回的根视图
+ * @param <VIEW> View的子类,可以指定ViewHolder中要返回的根视图
  *
  * @创建者 lai
  * @创建时间 2016/4/30
@@ -14,19 +14,17 @@ import java.util.List;
  * @更新时间 2016/4/30 14:29
  * @描述 ViewHolder的基类
  */
-public abstract class BaseViewHolder<T extends View, V> {
+public abstract class BaseViewHolder<VIEW extends View, DATA> {
 
-    protected List<V> mDatas;
-    private   T       mRootView;//根视图
-    protected Context mContext;
+    protected List<DATA> mDatas;
+    private   VIEW       mRootView;//根视图
+    protected Context    mContext;
 
     public BaseViewHolder(Context context) {
         mContext = context;
         mRootView = initRootView();
-        initData();
         initListener();
         mRootView.setTag(this);
-        bindViewAndData();
     }
 
     protected void initListener() {
@@ -35,21 +33,15 @@ public abstract class BaseViewHolder<T extends View, V> {
     /**
      * 初始化根视图
      */
-    protected abstract T initRootView();
+    protected abstract VIEW initRootView();
 
-    /**
-     * 初始化数据
-     */
-    protected abstract void initData() ;
-
-    protected abstract void bindViewAndData();
 
     /**
      * 获取根视图
      *
      * @return
      */
-    public T getRootView() {
+    public VIEW getRootView() {
         return mRootView;
     }
 

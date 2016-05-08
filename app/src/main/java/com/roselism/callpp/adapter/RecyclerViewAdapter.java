@@ -6,16 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.roselism.callpp.R;
 import com.roselism.callpp.util.UIUtils;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * @param <T>
- *            显示的数据类型
+ * @param <DATA> 显示的数据类型
  *
  * @创建者 lai
  * @创建时间 2016/4/30
@@ -23,111 +25,131 @@ import butterknife.ButterKnife;
  * @更新时间 2016/4/30 19:49
  * @描述 主页面中RecyclerView的Adapter
  */
-public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter {
+public abstract class RecyclerViewAdapter<DATA> extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-	protected Context mContext = UIUtils.getContext();
-	protected List<T> mDatas;
-	protected OnItemClickListener mItemClickListener;// 点击监听
-	protected OnItemLongClickListener mItemLongClickListener;// 长按监听
+    protected Context mContext = UIUtils.getContext();
+    protected List<DATA>              mDatas;
+    protected OnItemClickListener     mItemClickListener;// 点击监听
+    protected OnItemLongClickListener mItemLongClickListener;// 长按监听
+    protected int VIEWTYPE_NORMAL = 0;
+    protected int VIEWTYPE_TITLE  = 1;
+    protected int VIEWTYPE_HEAD   = 2;
 
-	public RecyclerViewAdapter(List<T> datas) {
-		mDatas = datas;
-	}
+    public RecyclerViewAdapter(List<DATA> datas) {
+        mDatas = datas;
+    }
 
-	@Override
-	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
-			int viewType) {
-		return getViewHolder(parent);
-	}
+    @Override
+    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.bindData(position);
+    }
 
-	/**
-	 * @param parent
-	 *
-	 * @return
-	 */
-	protected abstract RecyclerView.ViewHolder getViewHolder(ViewGroup parent);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEWTYPE_NORMAL) {
+            return getNormalViewHolder(parent);
+        } else if (viewType == VIEWTYPE_TITLE) {
+            return new TitleViewHolder(parent);
+        } else if (viewType == VIEWTYPE_HEAD) {
+            return getHeadViewHolder(parent);
+        }
+        return null;
+    }
 
-	@Override
-	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-		ViewHolder viewholder = (RecyclerViewAdapter.ViewHolder) holder;
-		viewholder.bindData(position);
-	}
+    /**
+     * 头部的布局ViewHolder
+     * @param parent
+     * @return
+     */
+    protected ViewHolder getHeadViewHolder(ViewGroup parent) {
+        return null;
+    }
 
-	/**
-	 * 给条目设置点击监听
-	 *
-	 * @param itemClickListener
-	 *            点击监听回调接口
-	 */
-	public void setOnItemClickListener(OnItemClickListener itemClickListener) {
-		mItemClickListener = itemClickListener;
-	}
+    /**
+     * 普通的viewHolder
+     * @param parent
+     * @return
+     */
+    protected abstract ViewHolder getNormalViewHolder(ViewGroup parent);
 
-	/**
-	 * 给条目设置长按监听
-	 *
-	 * @param itemLongClickListener
-	 *            长按监听回调接口
-	 */
-	public void setOnItemLongClickListener(
-			OnItemLongClickListener itemLongClickListener) {
-		mItemLongClickListener = itemLongClickListener;
-	}
+    /**
+     * 给条目设置点击监听
+     *
+     * @param itemClickListener 点击监听回调接口
+     */
+    public void setOnItemClickListener(OnItemClickListener itemClickListener) {
+        mItemClickListener = itemClickListener;
+    }
 
-	@Override
-	public int getItemCount() {
-		if (mDatas != null)
-			return mDatas.size();
-		return 0;
-	}
+    /**
+     * 给条目设置长按监听
+     *
+     * @param itemLongClickListener 长按监听回调接口
+     */
+    public void setOnItemLongClickListener(
+            OnItemLongClickListener itemLongClickListener) {
+        mItemLongClickListener = itemLongClickListener;
+    }
 
-	public interface OnItemClickListener {
-		void onItemClick(View view, int position);
-	}
+    @Override
+    public int getItemCount() {
+        if (mDatas != null)
+            return mDatas.size();
+        return 0;
+    }
 
-	public interface OnItemLongClickListener {
-		void onItemLongClick(View view, int position);
-	}
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
 
-	public abstract class ViewHolder extends RecyclerView.ViewHolder
-			implements
-				View.OnClickListener,
-				View.OnLongClickListener {
-		/**
-		 * @param LayoutRes
-		 *            布局文件
-		 * @param parent
-		 *            装布局文件的ViewGroup
-		 */
-		public ViewHolder(@LayoutRes int LayoutRes, ViewGroup parent) {
-			super(LayoutInflater.from(mContext).inflate(LayoutRes, parent,
-					false));
-			ButterKnife.bind(this, itemView);
-			itemView.setOnClickListener(this);
-			itemView.setOnLongClickListener(this);
-		}
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
+    }
 
-		@Override
-		public void onClick(View v) {
-			if (mItemClickListener != null) {
-				mItemClickListener.onItemClick(v, getAdapterPosition());
-			}
-		}
+    protected abstract class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        /**
+         * @param LayoutRes 布局文件
+         * @param parent    装布局文件的ViewGroup
+         */
+        public ViewHolder(@LayoutRes int LayoutRes, ViewGroup parent) {
+            super(LayoutInflater.from(mContext).inflate(LayoutRes, parent, false));
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
 
-		@Override
-		public boolean onLongClick(View v) {
-			if (mItemLongClickListener != null) {
-				mItemLongClickListener.onItemLongClick(v, getAdapterPosition());
-			}
-			return true;
-		}
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, getAdapterPosition());
+            }
+        }
 
-		/**
-		 * 绑定数据
-		 *
-		 * @param position
-		 *            position
-		 */
-		public abstract void bindData(int position);
-	}
+        @Override
+        public boolean onLongClick(View v) {
+            if (mItemLongClickListener != null) {
+                mItemLongClickListener.onItemLongClick(v, getAdapterPosition());
+            }
+            return true;
+        }
+
+        /**
+         * 绑定数据
+         * @param position position
+         */
+        public abstract void bindData(int position);
+    }
+
+    protected class TitleViewHolder extends ViewHolder {
+        @Bind(R.id.item_title) TextView mItemTitle;
+
+        public TitleViewHolder(ViewGroup parent) {
+            super(R.layout.item_title, parent);
+        }
+
+        @Override
+        public void bindData(int position) {
+            mItemTitle.setText(mDatas.get(position).toString());
+        }
+    }
 }
