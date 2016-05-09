@@ -2,6 +2,8 @@ package com.roselism.callpp.model.domain.bmob;
 
 /**
  * Created by simon on 2016/4/30.
+ *
+ * @deprecated 不在使用，请使用com.roselism.callpp.model.domain.bmobuser代替
  */
 public class User extends cn.bmob.v3.BmobUser {
 
@@ -27,3 +29,4 @@ public class User extends cn.bmob.v3.BmobUser {
         this.nickName = nickName;
     }
 }
+

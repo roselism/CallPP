@@ -6,8 +6,8 @@ import com.roselism.callpp.model.domain.bmob.User;
 import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.model.engine.stragegy.StragegyContent;
-import com.roselism.callpp.model.engine.stragegy.query.bmob.QueryUserByEmailStragegy;
-import com.roselism.callpp.model.engine.stragegy.query.bmob.UserLoginStragegy;
+import com.roselism.callpp.model.engine.stragegy.query.QueryUserBmobByEmailStragegy;
+import com.roselism.callpp.model.engine.stragegy.query.UserBmobLoginStragegy;
 import com.roselism.callpp.util.convert.Converter;
 
 /**
@@ -34,7 +34,7 @@ public class QueryUserReceiver {
 
         // 获取Bmob的user对象
         StragegyContent<User> content = new StragegyContent();
-        content.setStragegy(new QueryUserByEmailStragegy(email));
+        content.setStragegy(new QueryUserBmobByEmailStragegy(email));
         content.run(new OnOperatListener<User>() {
 
             /**
@@ -76,7 +76,7 @@ public class QueryUserReceiver {
         RoseUser2BmobUser converter = new RoseUser2BmobUser();
         User user = converter.convert(roseUser); // 转换成bmobuser
         StragegyContent<User> content = new StragegyContent();
-        content.setStragegy(new UserLoginStragegy(user));
+        content.setStragegy(new UserBmobLoginStragegy(user));
         content.run(new OnOperatListener<User>() {
             @Override
             public void onSuccedd(User t) {

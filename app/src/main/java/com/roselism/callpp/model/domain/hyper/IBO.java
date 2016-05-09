@@ -1,12 +1,15 @@
-package com.roselism.callpp.model.domain.rose;
+package com.roselism.callpp.model.domain.hyper;
 
 /**
+ * 抽象角色
  * bussiness Objects
  * 业务类的属性接口
+ * <p>
  * Created by simon on 2016/4/30.
+ * 提供了业务类的基本接口
  */
 public interface IBO {
-
+    
     /**
      * 获取id
      *
@@ -40,13 +43,5 @@ public interface IBO {
      * @return
      */
     String getType();
-
-    /**
-     * 设置当前bo类的类型
-     *
-     * @param type
-     */
-    void setType(String type);
-
 
 }

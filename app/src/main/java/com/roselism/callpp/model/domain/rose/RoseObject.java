@@ -1,8 +1,12 @@
 package com.roselism.callpp.model.domain.rose;
 
+import com.roselism.callpp.model.domain.hyper.IBO;
+
 /**
  * Business Object
  * Created by simon on 2016/4/30.
+ *
+ * @deprecated 已经过时，请使用具体接口替代 比如 RoseUser
  */
 public abstract class RoseObject implements IBO {
 
@@ -66,19 +70,18 @@ public abstract class RoseObject implements IBO {
         this.updateData = updateData;
     }
 
-
     /**
      * 添加方法
      */
-    abstract void save(OnSaveListener<? extends RoseObject> listener);
+    protected abstract void save(OnSaveListener<? extends RoseObject> listener);
 
     /**
      * 更新
      */
-    abstract void update();
+    protected abstract void update();
 
     /**
      * 删除
      */
-    abstract void delete();
+    protected abstract void delete();
 }

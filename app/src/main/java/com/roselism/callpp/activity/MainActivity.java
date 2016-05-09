@@ -13,8 +13,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
-    @Bind(R.id.main_rg_toolbar)        RadioGroup mRgToolbar;
-    @Bind(R.id.main_viewpager_content) ViewPager  mViewpagerContent;
+    @Bind(R.id.main_rg_toolbar) RadioGroup mRgToolbar;
+    @Bind(R.id.main_viewpager_content) ViewPager mViewpagerContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      * 把RadioButton的ID转换成索引
      *
      * @param rbId 要转换的ID
-     *
      * @return RadioButton相对Toolbar的索引
      */
     private int rbId2Index(int rbId) {
@@ -57,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 throw new RuntimeException("点击Toolbar时出现错误");
         }
     }
+
     /**
      * 把索引转换成RadioButton的ID
      *
      * @param index 要转换的索引
-     *
      * @return RadioButton的ID
      */
     private int index2RbId(int index) {
@@ -80,10 +79,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mViewpagerContent.setCurrentItem(rbId2Index(checkedId));
     }
 
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override

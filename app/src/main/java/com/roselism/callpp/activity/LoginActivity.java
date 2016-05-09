@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     void initData() {
-
+//        Intent intent= new Intent()
     }
 
     @Override
