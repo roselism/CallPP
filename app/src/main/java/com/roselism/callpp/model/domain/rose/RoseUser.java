@@ -10,11 +10,24 @@ import com.roselism.callpp.util.convert.Converter;
 
 import cn.bmob.v3.listener.SaveListener;
 
+
 /**
  * Created by simon on 2016/4/30.
+ * <p>
+ * 转换策略的上下文对象
+ *
+ * @deprecated 不再使用，请使用具体的队形替代如：BmobUser
  */
 public class RoseUser extends RoseObject {
+
+    /**
+     * 邮箱
+     */
     String email;
+
+    /**
+     * 密码
+     */
     String password;
 
     /**
@@ -32,13 +45,41 @@ public class RoseUser extends RoseObject {
      */
     boolean emailVerified;
 
-
-    // 用户的昵称
+    /**
+     * 用户的昵称
+     */
     String nickName;
 
+    /**
+     * 类型转换器，用于转换成其他的User类型对象
+     */
+    private Converter<RoseUser, ?> mConvert;
 
     public RoseUser() {
+
     }
+
+    /**
+     * 设置转换器
+     * 策略模式
+     *
+     * @param converter 转换器
+     * @param <R>       转换目标类型
+     */
+    public <R> void setConverter(Converter<RoseUser, R> converter) {
+        this.mConvert = converter;
+    }
+
+    /**
+     * 转换成R类型
+     *
+     * @param <R>
+     * @return
+     */
+    public <R> R convert() {
+        return (R) mConvert.convert(this);
+    }
+
 
     public boolean isEmailVerified() {
         return emailVerified;
@@ -96,7 +137,7 @@ public class RoseUser extends RoseObject {
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
         final User user = converter.convert(this);
 
-        // bmob user 的登陆逻辑，还需要添加别的登录逻辑
+        // bmob mUser 的登陆逻辑，还需要添加别的登录逻辑
 
         user.login(CallppApplication.getContext(), new SaveListener() {
             @Override
@@ -113,7 +154,6 @@ public class RoseUser extends RoseObject {
         });
     }
 
-    @Override
     public void save(final OnSaveListener<? extends RoseObject> listener) {
         // 存储策略 - bmob对象的存储
         Converter<RoseUser, User> converter = new RoseUser2BmobUser();
@@ -133,15 +173,12 @@ public class RoseUser extends RoseObject {
     }
 
     @Override
-    public void update() {
-
+    protected void update() {
 
     }
 
     @Override
-    public void delete() {
+    protected void delete() {
 
     }
-
-
 }

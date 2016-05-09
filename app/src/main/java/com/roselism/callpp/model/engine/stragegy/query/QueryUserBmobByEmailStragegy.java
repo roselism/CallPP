@@ -1,10 +1,13 @@
-package com.roselism.callpp.model.engine.stragegy.query.bmob;
+package com.roselism.callpp.model.engine.stragegy.query;
 
 import android.content.Context;
 
 import com.roselism.callpp.CallppApplication;
+import com.roselism.callpp.model.domain.Baas;
 import com.roselism.callpp.model.domain.bmob.User;
+import com.roselism.callpp.model.domain.rose.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
+import com.roselism.callpp.model.engine.stragegy.QueryUserStragegy;
 import com.roselism.callpp.model.engine.stragegy.Stragegy;
 import com.roselism.callpp.util.LogUtil;
 
@@ -17,14 +20,22 @@ import cn.bmob.v3.listener.FindListener;
  * 查询bmob下的某个用户
  * Created by simon on 2016/4/30.
  */
-public class QueryUserByEmailStragegy implements Stragegy<User> {
+public class QueryUserBmobByEmailStragegy extends QueryUserStragegy implements Stragegy<User> {
 
     String email;
     Context mContext;
 
-    public QueryUserByEmailStragegy(String email) {
+    /**
+     * @param email
+     * @Deprecated 不在使用，请使用QueryUserBmobByEmailStragegy(RoseUser mUser) 替代
+     */
+    public QueryUserBmobByEmailStragegy(String email) {
         this.email = email;
         mContext = CallppApplication.getContext();
+    }
+
+    public QueryUserBmobByEmailStragegy(RoseUser roseUser) {
+        super(roseUser);
     }
 
     /**
@@ -56,5 +67,11 @@ public class QueryUserByEmailStragegy implements Stragegy<User> {
                 listener.onError(new Exception(i + "" + s));
             }
         });
+    }
+
+
+    @Override
+    public void query(Baas.QueryListener listener) {
+
     }
 }

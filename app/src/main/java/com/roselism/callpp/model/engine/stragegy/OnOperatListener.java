@@ -5,6 +5,7 @@ package com.roselism.callpp.model.engine.stragegy;
  * Created by simon on 2016/4/30.
  *
  * @param <R> return type
+ * @deprecated 不再推荐使用，请使用特定的回掉接口替代
  */
 public interface OnOperatListener<R> {
 

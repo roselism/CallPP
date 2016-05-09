@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.engine.stragegy.query.bmob;
+package com.roselism.callpp.model.engine.stragegy.query;
 
 import android.text.TextUtils;
 
@@ -12,10 +12,10 @@ import cn.bmob.v3.BmobQuery;
  * 根据用户提供的信息查询用户是否存在
  * Created by simon on 16-5-4.
  */
-public class QueryUserByInfoStragegy implements Stragegy<User> {
+public class QueryUserBmobByInfoStragegy implements Stragegy<User> {
     private User user;
 
-    public QueryUserByInfoStragegy(User user) {
+    public QueryUserBmobByInfoStragegy(User user) {
         this.user = user;
     }
 
