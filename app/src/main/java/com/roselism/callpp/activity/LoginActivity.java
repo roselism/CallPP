@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.model.baas.BmobServices;
+import com.roselism.callpp.model.domain.dust.BmobBaseUser;
 import com.roselism.callpp.model.domain.dust.RoseUser;
 import com.roselism.callpp.model.engine.Command;
 import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
@@ -27,6 +27,7 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * @author simon wang
@@ -138,22 +139,20 @@ public class LoginActivity extends AppCompatActivity implements
         }
 
         String email = mloginEtEmail.getText().toString();
+        BmobBaseUser user = new BmobBaseUser();
+        user.setEmail(email);
+        user.setPassword(pwdAgain);
+        user.signUp(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+            }
 
-//        final RoseUser user = new RoseUser();
-//        user.setEmail(email);
-//        user.setPassword(password);
-//        user.save(new OnSaveListener<RoseUser>() {
-//            @Override
-//            public void onFinish() {
-//                LogUtil.i(user.getEmail() + "储存成功");
-//                Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError() {
-//                LogUtil.i(user.getEmail() + "注册失败");
-//            }
-//        });
+            @Override
+            public void onFailure(int i, String s) {
+                Toast.makeText(LoginActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
@@ -163,10 +162,24 @@ public class LoginActivity extends AppCompatActivity implements
         String email = mloginEtEmail.getText().toString();
         String password = mloginEtPassword.getText().toString().trim();
 
-        com.roselism.callpp.model.abs.RoseUser roseUser = new com.roselism.callpp.model.abs.RoseUser(new BmobServices());
-        roseUser.setEmail(email);
-        roseUser.setPassword(password);
-        roseUser.login();
+//        com.roselism.callpp.model.abs.RoseUser roseUser = new com.roselism.callpp.model.abs.RoseUser(new BmobServices());
+//        roseUser.setEmail(email);
+//        roseUser.setPassword(password);
+//        roseUser.login();
+        BmobBaseUser user = new BmobBaseUser();
+        user.setUsername(email);
+        user.setPassword(password);
+        user.login(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         enterHome();
     }
