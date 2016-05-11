@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configs>
-
     <!--mob 的配置文件-->
+
+    <!--mob的配置信息-->
     <config>
-        <name>
-            mob
-        </name>
-        <appkey>
-            125fd0563b954
-        </appkey>
-        <AppSecret>
-            a7594cc080c5fc58ea4c01db17af15dd
-        </AppSecret>
+        <name>mob</name>
+        <appkey>125fd0563b954</appkey>
+        <AppSecret>a7594cc080c5fc58ea4c01db17af15dd</AppSecret>
     </config>
 
+    <!--bmob的配置信息-->
+    <config>
+        <name>bmob</name>
+        <appkey>5b3be373e078b301e82d410c7e207e1d</appkey>
+    </config>
 </configs>
