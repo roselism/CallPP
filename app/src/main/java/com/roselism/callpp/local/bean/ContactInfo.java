@@ -13,7 +13,7 @@ import java.util.Comparator;
  */
 public class ContactInfo implements Comparable<ContactInfo> {
 
-    private Comparator<ContactInfo> mComparator;  // 比较器
+    private static Comparator<ContactInfo> mComparator;  // 比较器
     private String lookupKey;
     private String displayName;// 联系人姓名
     private String number;// 联系人号码
@@ -43,7 +43,7 @@ public class ContactInfo implements Comparable<ContactInfo> {
         this.lookupKey = lookupKey;
     }
 
-    public void setComparator(Comparator<ContactInfo> comparator) {
+    public static void setComparator(Comparator<ContactInfo> comparator) {
         mComparator = comparator;
     }
 
