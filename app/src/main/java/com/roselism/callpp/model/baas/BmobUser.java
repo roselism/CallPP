@@ -1,6 +1,7 @@
 package com.roselism.callpp.model.baas;
 
-import com.roselism.callpp.model.domain.adapter.BmobIBOAdapter;
+import com.roselism.callpp.model.abs.IRoseUser;
+import com.roselism.callpp.model.domain.adapter.BmobIRoseAdapter;
 import com.roselism.callpp.model.domain.filed.UserFiled;
 
 /**
@@ -8,7 +9,7 @@ import com.roselism.callpp.model.domain.filed.UserFiled;
  * @create_time: 2016/05/08 12:26
  * @packageName: com.roselism.callpp.model.domain.bmob
  */
-public class BmobUser extends BmobIBOAdapter implements UserFiled {
+public class BmobUser extends BmobIRoseAdapter implements UserFiled, IRoseUser {
 
     /**
      * 邮箱
@@ -19,22 +20,27 @@ public class BmobUser extends BmobIBOAdapter implements UserFiled {
      * 用户的电话
      */
     private String phoneNumber;
+
     /**
      * 用户头像的url地址
      */
     private String profileUrl;
+
     /**
      * 用户邮箱是否验证
      */
     private boolean emailVerified;
+
     /**
      * 用户的昵称
      */
     private String nickName;
+
     /**
      * 密码
      */
     private String password;
+
 
     public String getEmail() {
         return email;
@@ -82,9 +88,5 @@ public class BmobUser extends BmobIBOAdapter implements UserFiled {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getCreateDate() {
-        return null;
     }
 }

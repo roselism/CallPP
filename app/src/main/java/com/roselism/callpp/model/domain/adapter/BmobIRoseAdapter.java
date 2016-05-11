@@ -1,6 +1,6 @@
 package com.roselism.callpp.model.domain.adapter;
 
-import com.roselism.callpp.model.abs.IBO;
+import com.roselism.callpp.model.abs.IRose;
 
 import cn.bmob.v3.BmobObject;
 
@@ -11,7 +11,7 @@ import cn.bmob.v3.BmobObject;
  * @create_time: 2016/05/08 13:40
  * @packageName: com.roselism.callpp.model.domain
  */
-public class BmobIBOAdapter extends BmobObject implements IBO {
+public class BmobIRoseAdapter extends BmobObject implements IRose {
     public final String type = "BMOB";
 
     @Override

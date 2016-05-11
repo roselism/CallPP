@@ -3,6 +3,8 @@ package com.roselism.callpp.model.baas;
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.roselism.callpp.CallppApplication;
+import com.roselism.callpp.model.abs.RoseUser;
 import com.roselism.callpp.model.domain.adapter.ContentValues2BmobQuery;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class BmobServices implements Baas {
     private Context mcontext;
 
     public BmobServices() {
+        mcontext = CallppApplication.getContext();
     }
 
     public BmobServices(Context context) {
@@ -37,9 +40,12 @@ public class BmobServices implements Baas {
                 listener.onQuery(list);
             }
 
+//            RoseUser roseUser = new RoseUser() {
+
+
             @Override
             public void onError(int i, String s) {
-
+                listener.onError(new Throwable(i + "" + s));
             }
         });
     }

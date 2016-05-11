@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.model.domain.dust.OnSaveListener;
+import com.roselism.callpp.model.baas.BmobServices;
 import com.roselism.callpp.model.domain.dust.RoseUser;
 import com.roselism.callpp.model.engine.Command;
 import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
@@ -137,22 +137,23 @@ public class LoginActivity extends AppCompatActivity implements
             return;
         }
 
-        final RoseUser user = new RoseUser();
         String email = mloginEtEmail.getText().toString();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.save(new OnSaveListener<RoseUser>() {
-            @Override
-            public void onFinish() {
-                LogUtil.i(user.getEmail() + "储存成功");
-                Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onError() {
-                LogUtil.i(user.getEmail() + "注册失败");
-            }
-        });
+//        final RoseUser user = new RoseUser();
+//        user.setEmail(email);
+//        user.setPassword(password);
+//        user.save(new OnSaveListener<RoseUser>() {
+//            @Override
+//            public void onFinish() {
+//                LogUtil.i(user.getEmail() + "储存成功");
+//                Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onError() {
+//                LogUtil.i(user.getEmail() + "注册失败");
+//            }
+//        });
     }
 
     /**
@@ -161,10 +162,12 @@ public class LoginActivity extends AppCompatActivity implements
     public void login() {
         String email = mloginEtEmail.getText().toString();
         String password = mloginEtPassword.getText().toString().trim();
-        final RoseUser user = new RoseUser();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.login(); // 登陆
+
+        com.roselism.callpp.model.abs.RoseUser roseUser = new com.roselism.callpp.model.abs.RoseUser(new BmobServices());
+        roseUser.setEmail(email);
+        roseUser.setPassword(password);
+        roseUser.login();
+
         enterHome();
     }
 

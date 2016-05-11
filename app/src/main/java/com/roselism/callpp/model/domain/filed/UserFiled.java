@@ -10,6 +10,9 @@ package com.roselism.callpp.model.domain.filed;
 public interface UserFiled {
     String EMAIL = "email";
 
+    /**
+     * 电话号码字段
+     */
     String PHONE_NUMBER = "phoneNumber";
 
     /**

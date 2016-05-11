@@ -1,6 +1,6 @@
 package com.roselism.callpp.model.domain.dust;
 
-import com.roselism.callpp.model.abs.IBO;
+import com.roselism.callpp.model.abs.IRose;
 
 /**
  * Business Object
@@ -8,7 +8,7 @@ import com.roselism.callpp.model.abs.IBO;
  *
  * @deprecated 已经过时，请使用具体接口替代 比如 RoseUser
  */
-public abstract class RoseObject implements IBO {
+public abstract class RoseObject implements IRose {
 
     public static final String BMOB_TYPE = "bmob";
 

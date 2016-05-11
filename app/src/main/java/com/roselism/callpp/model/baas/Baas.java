@@ -52,7 +52,20 @@ public interface Baas {
      * @packageName: com.roselism.callpp.model.engine.stragegy
      */
     interface QueryListener<R> {
+
+        /**
+         * 查询完毕回掉
+         *
+         * @param r 返回的数据
+         */
         void onQuery(R r);
+
+        /**
+         * 当查询时发生异常的时候回调
+         *
+         * @param throwable 异常
+         */
+        void onError(Throwable throwable);
     }
 
     /**

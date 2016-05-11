@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.roselism.callpp.CallppApplication;
 import com.roselism.callpp.model.domain.dust.RoseUser;
-//import com.roselism.callpp.model.RoseUser;
+//import com.roselism.callpp.model.abs.RoseUser;
 
 /**
  * 查询用户的具体策略

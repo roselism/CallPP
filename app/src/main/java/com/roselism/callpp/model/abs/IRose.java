@@ -8,8 +8,8 @@ package com.roselism.callpp.model.abs;
  * Created by simon on 2016/4/30.
  * 提供了业务类的基本接口
  */
-public interface IBO {
-    
+public interface IRose {
+
     /**
      * 获取id
      *

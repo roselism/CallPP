@@ -16,10 +16,15 @@ import android.support.v4.app.ActivityCompat;
 
 import com.roselism.callpp.R;
 import com.roselism.callpp.local.bean.ContactInfo;
+import com.roselism.callpp.model.baas.BmobUser;
+import com.roselism.callpp.model.domain.dust.BmobBaseUser;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * @创建者 lai
@@ -41,6 +46,54 @@ public class ContactUtil {
     };
 
     /**
+     * 检查联系人列表中有那些人是云端联系人，如果是则获取云联系人的显示名
+     * 因为contactInfo 是可变类型，所以这里没有返回值
+     * <p>
+     * <p>
+     * <p>
+     * 我们推荐您使用真实的头像，那样您的联系人就能更快的确定您的身份
+     *
+     * @param contacts
+     */
+    public static void Check4CloudContacts(List<ContactInfo> contacts, Context context) {
+        BmobQuery<BmobBaseUser> query;
+        for (final ContactInfo contact : contacts) {
+            query = new BmobQuery<>();
+            query.addWhereEqualTo(BmobUser.PHONE_NUMBER, contact.getNumber()); // 根据当前联系人列表查询网络端的云联系人
+            query.findObjects(context, new FindListener<BmobBaseUser>() {
+                @Override
+                public void onSuccess(List<BmobBaseUser> list) {
+                    if (list.size() > 0) { // 云端由此联系人
+                        BmobBaseUser cloudContacts = list.get(0);
+                        contact.setOnCloud(true);
+                        contact.setDisplayName(cloudContacts.getNickName());
+                        // TODO: 2016/5/11 获取云端联系人头像
+
+                        cloudContacts.getProfileUrl();
+                    }
+                }
+
+                @Override
+                public void onError(int i, String s) {
+
+                }
+            });
+        }
+    }
+
+    /**
+     * 获取联系人列表，网络联系人（如果有） 和本地联系人
+     *
+     * @param context 上下文对象
+     * @return 已经同步过网络的联系人列表
+     */
+    public static List<ContactInfo> getAllContactWithCloud(Context context) {
+        List<ContactInfo> contacts = getAllLocalContact(context);
+        Check4CloudContacts(contacts, context);
+        return contacts;
+    }
+
+    /**
      * 获取所有本地联系人信息
      *
      * @return 所有的本地联系人信息
@@ -55,7 +108,6 @@ public class ContactUtil {
      * 获取手机联系人的信息
      *
      * @param context context
-     *
      * @return 所有的手机联系人的信息
      */
     private static List<ContactInfo> getPhoneContacts(Context context) {
@@ -140,5 +192,4 @@ public class ContactUtil {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         UIUtils.getContext().startActivity(intent);
     }
-
 }
