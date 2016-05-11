@@ -3,6 +3,7 @@ package com.roselism.callpp.model.engine;
 /**
  * 命令发射器
  * 命令模式中的Invoker
+ * 命令的请求者
  * Created by simon on 2016/4/30.
  */
 public class Sender {

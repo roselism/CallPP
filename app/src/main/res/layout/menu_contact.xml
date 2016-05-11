@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/contact_menu_bg"
+              android:orientation="vertical">
+
+    <com.roselism.callpp.view.ContactMenuItemView
+        android:id="@+id/contact_menu_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:iconRes="@mipmap/contact_call"
+        app:isShow="true"
+        app:text="@string/contact_menu_call"/>
+
+    <com.roselism.callpp.view.ContactMenuItemView
+        android:id="@+id/contact_menu_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:iconRes="@mipmap/contact_edit"
+        app:isShow="false"
+        app:text="@string/contact_menu_edit"/>
+
+</LinearLayout>

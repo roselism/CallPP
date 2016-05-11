@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true">
 
     <ImageView
         android:id="@+id/main_item_img_photo"
@@ -11,10 +14,29 @@
         android:layout_gravity="center_horizontal"
         android:scaleType="fitXY"/>
 
-    <TextView
-        android:id="@+id/main_item_tv_phonenumber"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
-        android:gravity="center_horizontal|bottom"/>
+        android:background="@color/colorContactInfo"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/main_item_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/phone_name_size"/>
+
+        <TextView
+            android:id="@+id/main_item_tv_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/phone_number_size"/>
+    </LinearLayout>
+
+
 </android.support.v7.widget.CardView>

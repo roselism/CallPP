@@ -8,7 +8,10 @@
     <string name="login_login_button">登陆</string>
     <string name="login_signup_button">注册</string>
     <string name="login_login_signup_button">登陆/注册</string>
-
+    <!--主界面底部菜单-->
     <string name="main_rb_toolbar_home">首页</string>
     <string name="main_rb_toolbar_user">用户设置</string>
+    <!--联系人菜单-->
+    <string name="contact_menu_call">拨 号</string>
+    <string name="contact_menu_edit">编 辑</string>
 </resources>

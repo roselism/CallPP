@@ -3,8 +3,7 @@ package com.roselism.callpp.adapter;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.base.SuperBaseAdapter;
+import com.roselism.callpp.adapter.viewholder.BaseViewHolder;
 
 import java.util.List;
 
@@ -14,7 +13,9 @@ import java.util.List;
  * @packageName com.roselism.callpp.adapter
  * @更新时间 2016/4/30 15:22
  * @描述 TODO
+ * @deprecated 由于ListView 替换成RecyclerView所以该类弃用
  */
+@Deprecated
 public class UserAdapter extends SuperBaseAdapter<UserAdapter.ViewHolder,String> {
 
     public UserAdapter(Context context, List<String> data) {

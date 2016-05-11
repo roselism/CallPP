@@ -5,8 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.roselism.callpp.base.BaseViewHolder;
-import com.roselism.callpp.factory.ViewHolderFactory;
+import com.roselism.callpp.adapter.viewholder.BaseViewHolder;
+import com.roselism.callpp.adapter.viewholder.ViewHolderFactory;
 
 /**
  * @创建者 lai
@@ -17,12 +17,12 @@ import com.roselism.callpp.factory.ViewHolderFactory;
  */
 public class ContentPagerAdapter extends PagerAdapter {
 
-    private int mCount;
+    private int     mCount;
     private Context mContext;
 
     /**
      * @param context 上下文
-     * @param count   显示多少页
+     * @param count 显示多少页
      */
     public ContentPagerAdapter(Context context, int count) {
         mContext = context;
