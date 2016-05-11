@@ -12,111 +12,125 @@ import java.util.Comparator;
  * @描述 电话联系信息
  */
 public class ContactInfo implements Comparable<ContactInfo> {
-	private String lookupKey;
-	private String displayName;// 联系人姓名
-	private String number;// 联系人号码
-	private int timesContacted;// 联系次数
-	private long lastTimeContacted;// 最后通话时间
-	private int hasPhoneNumber;// 是否有号码
-	private long contactID;// 联系人ID
-	private Bitmap photo;// 图片
-	// 比较器
-	private static Comparator<ContactInfo> mComparator;
 
-	public ContactInfo(String displayName, String number, int timesContacted,
-			long lastTimeContacted, int hasPhoneNumber, long contactID,
-			Bitmap photo, String lookupKey) {
-		this.displayName = displayName;
-		this.number = number;
-		this.timesContacted = timesContacted;
-		this.lastTimeContacted = lastTimeContacted;
-		this.hasPhoneNumber = hasPhoneNumber;
-		this.contactID = contactID;
-		this.photo = photo;
-		this.lookupKey = lookupKey;
-	}
+    private static Comparator<ContactInfo> mComparator;  // 比较器
+    private String lookupKey;
+    private String displayName;// 联系人姓名
+    private String number;// 联系人号码
+    private int timesContacted;// 联系次数
+    private long lastTimeContacted;// 最后通话时间
+    private int hasPhoneNumber;// 是否有号码
+    private long contactID;// 联系人ID
+    private Bitmap photo;// 图片
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    /**
+     * 是否在云端
+     *
+     * @author Simon
+     */
+    private boolean isOnCloud;
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    public ContactInfo(String displayName, String number, int timesContacted,
+                       long lastTimeContacted, int hasPhoneNumber, long contactID,
+                       Bitmap photo, String lookupKey) {
+        this.displayName = displayName;
+        this.number = number;
+        this.timesContacted = timesContacted;
+        this.lastTimeContacted = lastTimeContacted;
+        this.hasPhoneNumber = hasPhoneNumber;
+        this.contactID = contactID;
+        this.photo = photo;
+        this.lookupKey = lookupKey;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public static void setComparator(Comparator<ContactInfo> comparator) {
+        mComparator = comparator;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public int getTimesContacted() {
-		return timesContacted;
-	}
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-	public void setTimesContacted(int timesContacted) {
-		this.timesContacted = timesContacted;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public long getLastTimeContacted() {
-		return lastTimeContacted;
-	}
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-	public void setLastTimeContacted(long lastTimeContacted) {
-		this.lastTimeContacted = lastTimeContacted;
-	}
+    public int getTimesContacted() {
+        return timesContacted;
+    }
 
-	public int getHasPhoneNumber() {
-		return hasPhoneNumber;
-	}
+    public void setTimesContacted(int timesContacted) {
+        this.timesContacted = timesContacted;
+    }
 
-	public void setHasPhoneNumber(int hasPhoneNumber) {
-		this.hasPhoneNumber = hasPhoneNumber;
-	}
+    public long getLastTimeContacted() {
+        return lastTimeContacted;
+    }
 
-	public long getContactID() {
-		return contactID;
-	}
+    public void setLastTimeContacted(long lastTimeContacted) {
+        this.lastTimeContacted = lastTimeContacted;
+    }
 
-	public void setContactID(long contactID) {
-		this.contactID = contactID;
-	}
+    public int getHasPhoneNumber() {
+        return hasPhoneNumber;
+    }
 
-	public Bitmap getPhoto() {
-		return photo;
-	}
+    public void setHasPhoneNumber(int hasPhoneNumber) {
+        this.hasPhoneNumber = hasPhoneNumber;
+    }
 
-	public void setPhoto(Bitmap photo) {
-		this.photo = photo;
-	}
+    public long getContactID() {
+        return contactID;
+    }
 
-	public String getLookupKey() {
-		return lookupKey;
-	}
+    public void setContactID(long contactID) {
+        this.contactID = contactID;
+    }
 
-	@Override
-	public String toString() {
-		return "ContactInfo{" + "lookupKey='" + lookupKey + '\''
-				+ ", displayName='" + displayName + '\'' + ", number='"
-				+ number + '\'' + ", timesContacted=" + timesContacted
-				+ ", lastTimeContacted=" + lastTimeContacted
-				+ ", hasPhoneNumber=" + hasPhoneNumber + ", contactID="
-				+ contactID + ", photo=" + photo + '}';
-	}
+    public Bitmap getPhoto() {
+        return photo;
+    }
 
-	public Comparator<ContactInfo> getComparator() {
-		return mComparator;
-	}
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
 
-	public static void setComparator(Comparator<ContactInfo> comparator) {
-		mComparator = comparator;
-	}
+    public String getLookupKey() {
+        return lookupKey;
+    }
+//    这个可以省略
+//    public Comparator<ContactInfo> getComparator() {
+//        return mComparator;
+//    }
 
-	@Override
-	public int compareTo(ContactInfo contactInfo) {
-		return mComparator.compare(this, contactInfo);
-	}
+    @Override
+    public String toString() {
+        return "ContactInfo{" + "lookupKey='" + lookupKey + '\''
+                + ", displayName='" + displayName + '\'' + ", number='"
+                + number + '\'' + ", timesContacted=" + timesContacted
+                + ", lastTimeContacted=" + lastTimeContacted
+                + ", hasPhoneNumber=" + hasPhoneNumber + ", contactID="
+                + contactID + ", photo=" + photo + '}';
+    }
 
+    @Override
+    public int compareTo(ContactInfo contactInfo) {
+        return mComparator.compare(this, contactInfo);
+    }
+    
+    public boolean isOnCloud() {
+        return isOnCloud;
+    }
+
+    public void setOnCloud(boolean onCloud) {
+        isOnCloud = onCloud;
+    }
 }
