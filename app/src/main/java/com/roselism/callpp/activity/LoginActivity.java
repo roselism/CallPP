@@ -10,23 +10,20 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.model.domain.dust.BmobBaseUser;
-import com.roselism.callpp.model.domain.dust.RoseUser;
-import com.roselism.callpp.model.engine.Command;
-import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
-import com.roselism.callpp.model.engine.QueryUserReceiver;
-import com.roselism.callpp.model.engine.Sender;
-import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
+import com.roselism.callpp.domain.BmobBaseUser;
 import com.roselism.callpp.util.ConfigUtil;
 import com.roselism.callpp.util.LogUtil;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -100,11 +97,14 @@ public class LoginActivity extends AppCompatActivity implements
                 String email = mloginEtEmail.getText().toString().trim(); // 用户输入的邮箱地址
 
                 if (hasFocus && email != null && email.trim().length() > 0) {
-                    QueryUserReceiver receiver = new QueryUserReceiver(new OnOperatListener<RoseUser>() {
+                    BmobQuery<BmobBaseUser> query = new BmobQuery<>();
+                    query.addWhereEqualTo("email", email);
+//                    query.addWhereEqualTo("password");q
+                    query.findObjects(this, new FindListener<BmobBaseUser>() {
                         @Override
-                        public void onSuccedd(RoseUser user) { // 查有此人
-                            if (user != null) { // 该用户已经注册
-                                LogUtil.i(user.toString());
+                        public void onSuccess(List<BmobBaseUser> list) {
+                            if (list != null && list.size() > 0) {// 该用户已经注册
+                                LogUtil.i(list.get(0).toString());
                                 showLoginComponent();
                                 flag = LOGIN_ACTION;
                             } else { // 该用户还未注册
@@ -114,14 +114,11 @@ public class LoginActivity extends AppCompatActivity implements
                         }
 
                         @Override
-                        public void onError(Throwable error) {
+                        public void onError(int i, String s) {
                             Toast.makeText(LoginActivity.this, "有点小问题...", Toast.LENGTH_SHORT).show();
+                            LogUtil.i("i = " + i + " s = " + s);
                         }
                     });
-                    Command command = new QueryUserByEmailCommand(receiver, email);
-                    Sender sender = new Sender();
-                    sender.setCommand(command);
-                    sender.send();
                 }
                 break;
         }
@@ -162,10 +159,6 @@ public class LoginActivity extends AppCompatActivity implements
         String email = mloginEtEmail.getText().toString();
         String password = mloginEtPassword.getText().toString().trim();
 
-//        com.roselism.callpp.model.abs.RoseUser roseUser = new com.roselism.callpp.model.abs.RoseUser(new BmobServices());
-//        roseUser.setEmail(email);
-//        roseUser.setPassword(password);
-//        roseUser.login();
         BmobBaseUser user = new BmobBaseUser();
         user.setUsername(email);
         user.setPassword(password);

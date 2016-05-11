@@ -15,9 +15,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 import com.roselism.callpp.R;
+import com.roselism.callpp.domain.BmobBaseUser;
 import com.roselism.callpp.local.bean.ContactInfo;
-import com.roselism.callpp.model.baas.BmobUser;
-import com.roselism.callpp.model.domain.dust.BmobBaseUser;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class ContactUtil {
         BmobQuery<BmobBaseUser> query;
         for (final ContactInfo contact : contacts) {
             query = new BmobQuery<>();
-            query.addWhereEqualTo(BmobUser.PHONE_NUMBER, contact.getNumber()); // 根据当前联系人列表查询网络端的云联系人
+            query.addWhereEqualTo("phone_number", contact.getNumber()); // 根据当前联系人列表查询网络端的云联系人
             query.findObjects(context, new FindListener<BmobBaseUser>() {
                 @Override
                 public void onSuccess(List<BmobBaseUser> list) {

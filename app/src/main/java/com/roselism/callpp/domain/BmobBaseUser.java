@@ -1,9 +1,7 @@
-package com.roselism.callpp.model.domain.dust;
+package com.roselism.callpp.domain;
 
 /**
  * Created by simon on 2016/4/30.
- *
- * @deprecated 不在使用，请使用com.roselism.callpp.model.domain.bmobuser代替
  */
 public class BmobBaseUser extends cn.bmob.v3.BmobUser {
 
