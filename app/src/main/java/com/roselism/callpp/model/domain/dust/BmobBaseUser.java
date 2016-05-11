@@ -1,11 +1,11 @@
-package com.roselism.callpp.model.domain.bmob;
+package com.roselism.callpp.model.domain.dust;
 
 /**
  * Created by simon on 2016/4/30.
  *
  * @deprecated 不在使用，请使用com.roselism.callpp.model.domain.bmobuser代替
  */
-public class User extends cn.bmob.v3.BmobUser {
+public class BmobBaseUser extends cn.bmob.v3.BmobUser {
 
     // 图片的url地址
     String profileUrl;

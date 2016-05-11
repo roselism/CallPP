@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.domain.rose;
+package com.roselism.callpp.model.domain.dust;
 
 /**
  * Created by simon on 2016/4/30.

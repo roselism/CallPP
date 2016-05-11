@@ -3,9 +3,9 @@ package com.roselism.callpp.model.engine.stragegy.query;
 import android.content.Context;
 
 import com.roselism.callpp.CallppApplication;
-import com.roselism.callpp.model.domain.Baas;
-import com.roselism.callpp.model.domain.bmob.User;
-import com.roselism.callpp.model.domain.rose.RoseUser;
+import com.roselism.callpp.model.baas.Baas;
+import com.roselism.callpp.model.domain.dust.BmobBaseUser;
+import com.roselism.callpp.model.domain.dust.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.model.engine.stragegy.QueryUserStragegy;
 import com.roselism.callpp.model.engine.stragegy.Stragegy;
@@ -20,7 +20,7 @@ import cn.bmob.v3.listener.FindListener;
  * 查询bmob下的某个用户
  * Created by simon on 2016/4/30.
  */
-public class QueryUserBmobByEmailStragegy extends QueryUserStragegy implements Stragegy<User> {
+public class QueryUserBmobByEmailStragegy extends QueryUserStragegy implements Stragegy<BmobBaseUser> {
 
     String email;
     Context mContext;
@@ -44,21 +44,21 @@ public class QueryUserBmobByEmailStragegy extends QueryUserStragegy implements S
      * @param listener
      */
     @Override
-    public void run(final OnOperatListener<User> listener) {
-        BmobQuery<User> query = new BmobQuery<>();
+    public void run(final OnOperatListener<BmobBaseUser> listener) {
+        BmobQuery<BmobBaseUser> query = new BmobQuery<>();
         query.addWhereEqualTo("email", email);
-        query.findObjects(mContext, new FindListener<User>() {
+        query.findObjects(mContext, new FindListener<BmobBaseUser>() {
             @Override
-            public void onSuccess(List<User> list) {
+            public void onSuccess(List<BmobBaseUser> list) {
                 LogUtil.i("list.size = " + list.size() + "");
 
-                User user = null;
+                BmobBaseUser bmobBaseUser = null;
                 if (list != null && list.size() > 0) { // 查询成功且有数据
-                    user = list.get(0);
+                    bmobBaseUser = list.get(0);
                 } else { // 查询成功但是无数据
-                    user = null; // 如果没有这个用户的话就赋值为null
+                    bmobBaseUser = null; // 如果没有这个用户的话就赋值为null
                 }
-                listener.onSuccedd(user);
+                listener.onSuccedd(bmobBaseUser);
             }
 
             @Override

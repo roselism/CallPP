@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.roselism.callpp.R;
-import com.roselism.callpp.model.domain.rose.OnSaveListener;
-import com.roselism.callpp.model.domain.rose.RoseUser;
+import com.roselism.callpp.model.domain.dust.OnSaveListener;
+import com.roselism.callpp.model.domain.dust.RoseUser;
 import com.roselism.callpp.model.engine.Command;
 import com.roselism.callpp.model.engine.QueryUserByEmailCommand;
 import com.roselism.callpp.model.engine.QueryUserReceiver;

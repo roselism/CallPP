@@ -3,7 +3,8 @@ package com.roselism.callpp.model.engine.stragegy;
 import android.content.Context;
 
 import com.roselism.callpp.CallppApplication;
-import com.roselism.callpp.model.domain.hyper.RoseUser;
+import com.roselism.callpp.model.domain.dust.RoseUser;
+//import com.roselism.callpp.model.RoseUser;
 
 /**
  * 查询用户的具体策略

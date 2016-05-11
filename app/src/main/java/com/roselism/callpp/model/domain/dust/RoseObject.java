@@ -1,6 +1,6 @@
-package com.roselism.callpp.model.domain.rose;
+package com.roselism.callpp.model.domain.dust;
 
-import com.roselism.callpp.model.domain.hyper.IBO;
+import com.roselism.callpp.model.abs.IBO;
 
 /**
  * Business Object

@@ -1,7 +1,7 @@
 package com.roselism.callpp.model.engine.stragegy.query;
 
 import com.roselism.callpp.CallppApplication;
-import com.roselism.callpp.model.domain.bmob.User;
+import com.roselism.callpp.model.domain.dust.BmobBaseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.model.engine.stragegy.Stragegy;
 
@@ -11,20 +11,20 @@ import cn.bmob.v3.listener.SaveListener;
  * 用户登录测略
  * Created by simon on 16-5-4.
  */
-public class UserBmobLoginStragegy implements Stragegy<User> {
+public class UserBmobLoginStragegy implements Stragegy<BmobBaseUser> {
 
-    User user;
+    BmobBaseUser bmobBaseUser;
 
-    public UserBmobLoginStragegy(User user) {
-        this.user = user;
+    public UserBmobLoginStragegy(BmobBaseUser bmobBaseUser) {
+        this.bmobBaseUser = bmobBaseUser;
     }
 
     @Override
-    public void run(final OnOperatListener<User> listener) {
-        user.login(CallppApplication.getContext(), new SaveListener() {
+    public void run(final OnOperatListener<BmobBaseUser> listener) {
+        bmobBaseUser.login(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
-                listener.onSuccedd(user);
+                listener.onSuccedd(bmobBaseUser);
             }
 
             @Override

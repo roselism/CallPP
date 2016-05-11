@@ -1,6 +1,6 @@
 package com.roselism.callpp.model.domain.adapter;
 
-import com.roselism.callpp.model.domain.hyper.IBO;
+import com.roselism.callpp.model.abs.IBO;
 
 import cn.bmob.v3.BmobObject;
 

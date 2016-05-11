@@ -1,44 +1,40 @@
-package com.roselism.callpp.model.domain;
+package com.roselism.callpp.model.baas;
 
 import com.roselism.callpp.model.domain.adapter.BmobIBOAdapter;
+import com.roselism.callpp.model.domain.filed.UserFiled;
 
 /**
  * @author: Hyper Simon Wang
  * @create_time: 2016/05/08 12:26
  * @packageName: com.roselism.callpp.model.domain.bmob
  */
-public class BmobUser extends BmobIBOAdapter {
+public class BmobUser extends BmobIBOAdapter implements UserFiled {
 
     /**
      * 邮箱
      */
-    String email;
-
-    /**
-     * 密码
-     */
-    String password;
+    private String email;
 
     /**
      * 用户的电话
      */
-    String phoneNumber;
-
+    private String phoneNumber;
     /**
      * 用户头像的url地址
      */
-    String profileUrl;
-
+    private String profileUrl;
     /**
      * 用户邮箱是否验证
      */
-    boolean emailVerified;
-
+    private boolean emailVerified;
     /**
      * 用户的昵称
      */
-    String nickName;
-
+    private String nickName;
+    /**
+     * 密码
+     */
+    private String password;
 
     public String getEmail() {
         return email;

@@ -1,6 +1,6 @@
 package com.roselism.callpp.model.engine.stragegy;
 
-import com.roselism.callpp.model.domain.Baas;
+import com.roselism.callpp.model.baas.Baas;
 
 /**
  * 抽象查询器，所有具体查询策略的父类

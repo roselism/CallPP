@@ -1,6 +1,6 @@
-package com.roselism.callpp.model.domain.hyper;
+package com.roselism.callpp.model.abs;
 
-import com.roselism.callpp.model.domain.Baas;
+import com.roselism.callpp.model.baas.Baas;
 
 /**
  * 业务抽象角色
@@ -10,9 +10,14 @@ import com.roselism.callpp.model.domain.Baas;
  * @packageName: com.roselism.callpp.model.domain.hyper
  */
 public abstract class Rose implements IBO {
+
+    /**
+     * 持有一个具体实现角色对象（聚合）
+     */
     protected Baas mbaas;
 
     public Rose(Baas baas) {
         this.mbaas = baas;
     }
+
 }

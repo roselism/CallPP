@@ -1,4 +1,8 @@
-package com.roselism.callpp.model.domain;
+package com.roselism.callpp.model.baas;
+
+import android.content.ContentValues;
+
+import java.util.List;
 
 /**
  * 抽象具体实现接口
@@ -9,7 +13,7 @@ package com.roselism.callpp.model.domain;
  */
 public interface Baas {
 
-    void query(QueryListener listener);
+    <R> void query(ContentValues values, QueryListener<List<R>> listener);
 
     void delete(DeleteListener listener);
 

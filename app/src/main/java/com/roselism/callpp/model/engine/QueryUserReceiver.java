@@ -1,9 +1,9 @@
 package com.roselism.callpp.model.engine;
 
-import com.roselism.callpp.model.adapter.BmobUser2RoseUser;
-import com.roselism.callpp.model.adapter.RoseUser2BmobUser;
-import com.roselism.callpp.model.domain.bmob.User;
-import com.roselism.callpp.model.domain.rose.RoseUser;
+import com.roselism.callpp.model.domain.adapter.BmobUser2RoseUser;
+import com.roselism.callpp.model.domain.adapter.RoseUser2BmobUser;
+import com.roselism.callpp.model.domain.dust.BmobBaseUser;
+import com.roselism.callpp.model.domain.dust.RoseUser;
 import com.roselism.callpp.model.engine.stragegy.OnOperatListener;
 import com.roselism.callpp.model.engine.stragegy.StragegyContent;
 import com.roselism.callpp.model.engine.stragegy.query.QueryUserBmobByEmailStragegy;
@@ -33,23 +33,23 @@ public class QueryUserReceiver {
     void queryUserByEmail(String email) {
 
         // 获取Bmob的user对象
-        StragegyContent<User> content = new StragegyContent();
+        StragegyContent<BmobBaseUser> content = new StragegyContent();
         content.setStragegy(new QueryUserBmobByEmailStragegy(email));
-        content.run(new OnOperatListener<User>() {
+        content.run(new OnOperatListener<BmobBaseUser>() {
 
             /**
              * 查询成功
              * 如果有该对象，则返回该user对象
              * 如果没有该对象，则返回null
-             * @param bmobUser 查询到的bmobuser对象
+             * @param bmobBmobBaseUser 查询到的bmobuser对象
              */
             @Override
-            public void onSuccedd(User bmobUser) { // bmobuser查询
+            public void onSuccedd(BmobBaseUser bmobBmobBaseUser) { // bmobuser查询
 
-                if (bmobUser != null) { // 查有此人
+                if (bmobBmobBaseUser != null) { // 查有此人
                     // 将查询到的bmobuser转换成为roseuser对象
-                    Converter<User, RoseUser> converter = new BmobUser2RoseUser();
-                    RoseUser roseUser = converter.convert(bmobUser);
+                    Converter<BmobBaseUser, RoseUser> converter = new BmobUser2RoseUser();
+                    RoseUser roseUser = converter.convert(bmobBmobBaseUser);
                     listener.onSuccedd(roseUser);
                 } else {
                     listener.onSuccedd(null); // 查询成功但是没有这个人
@@ -74,12 +74,12 @@ public class QueryUserReceiver {
      */
     void login(RoseUser roseUser) {
         RoseUser2BmobUser converter = new RoseUser2BmobUser();
-        User user = converter.convert(roseUser); // 转换成bmobuser
-        StragegyContent<User> content = new StragegyContent();
-        content.setStragegy(new UserBmobLoginStragegy(user));
-        content.run(new OnOperatListener<User>() {
+        BmobBaseUser bmobBaseUser = converter.convert(roseUser); // 转换成bmobuser
+        StragegyContent<BmobBaseUser> content = new StragegyContent();
+        content.setStragegy(new UserBmobLoginStragegy(bmobBaseUser));
+        content.run(new OnOperatListener<BmobBaseUser>() {
             @Override
-            public void onSuccedd(User t) {
+            public void onSuccedd(BmobBaseUser t) {
                 listener.onSuccedd(new BmobUser2RoseUser().convert(t));
             }
 
@@ -103,6 +103,6 @@ public class QueryUserReceiver {
      */
     void queryUserByInfo(RoseUser user) {
         RoseUser2BmobUser roseUser2BmobUser = new RoseUser2BmobUser();
-        User bmobUser = roseUser2BmobUser.convert(user);
+        BmobBaseUser bmobBmobBaseUser = roseUser2BmobUser.convert(user);
     }
 }

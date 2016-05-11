@@ -1,6 +1,6 @@
 package com.roselism.callpp.model.engine;
 
-import com.roselism.callpp.model.domain.rose.RoseUser;
+import com.roselism.callpp.model.domain.dust.RoseUser;
 
 /**
  * 查询根据用户提供的信息，在服务器上是否存在这个用户

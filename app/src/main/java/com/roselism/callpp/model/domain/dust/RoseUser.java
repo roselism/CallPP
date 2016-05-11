@@ -1,10 +1,9 @@
-package com.roselism.callpp.model.domain.rose;
+package com.roselism.callpp.model.domain.dust;
 
 import android.widget.Toast;
 
 import com.roselism.callpp.CallppApplication;
-import com.roselism.callpp.model.adapter.RoseUser2BmobUser;
-import com.roselism.callpp.model.domain.bmob.User;
+import com.roselism.callpp.model.domain.adapter.RoseUser2BmobUser;
 import com.roselism.callpp.util.LogUtil;
 import com.roselism.callpp.util.convert.Converter;
 
@@ -13,7 +12,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by simon on 2016/4/30.
- * <p>
+ * <p/>
  * 转换策略的上下文对象
  *
  * @deprecated 不再使用，请使用具体的队形替代如：BmobUser
@@ -134,12 +133,12 @@ public class RoseUser extends RoseObject {
      * 用户的登陆逻辑
      */
     public void login() {
-        Converter<RoseUser, User> converter = new RoseUser2BmobUser();
-        final User user = converter.convert(this);
+        Converter<RoseUser, BmobBaseUser> converter = new RoseUser2BmobUser();
+        final BmobBaseUser bmobBaseUser = converter.convert(this);
 
         // bmob mUser 的登陆逻辑，还需要添加别的登录逻辑
 
-        user.login(CallppApplication.getContext(), new SaveListener() {
+        bmobBaseUser.login(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() { //登陆成功
                 Toast.makeText(CallppApplication.getContext(), "登陆成功", Toast.LENGTH_SHORT).show(); // 登陆成功
@@ -154,11 +153,16 @@ public class RoseUser extends RoseObject {
         });
     }
 
+    /**
+     * 储存
+     *
+     * @param listener
+     */
     public void save(final OnSaveListener<? extends RoseObject> listener) {
         // 存储策略 - bmob对象的存储
-        Converter<RoseUser, User> converter = new RoseUser2BmobUser();
-        final User user = converter.convert(this);
-        user.signUp(CallppApplication.getContext(), new SaveListener() {
+        Converter<RoseUser, BmobBaseUser> converter = new RoseUser2BmobUser();
+        final BmobBaseUser bmobBaseUser = converter.convert(this);
+        bmobBaseUser.signUp(CallppApplication.getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
                 listener.onFinish();

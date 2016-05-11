@@ -1,4 +1,4 @@
-package com.roselism.callpp.model.domain.hyper;
+package com.roselism.callpp.model.abs;
 
 /**
  * 抽象角色

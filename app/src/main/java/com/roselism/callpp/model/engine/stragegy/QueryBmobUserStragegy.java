@@ -1,7 +1,7 @@
 package com.roselism.callpp.model.engine.stragegy;
 
-import com.roselism.callpp.model.domain.Baas;
-import com.roselism.callpp.model.domain.BmobUser;
+import com.roselism.callpp.model.baas.Baas;
+import com.roselism.callpp.model.baas.BmobUser;
 
 import cn.bmob.v3.BmobQuery;
 
